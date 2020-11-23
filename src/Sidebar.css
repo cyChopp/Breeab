@@ -1,0 +1,29 @@
+.sidebar{
+    flex: 0.2; /* use 20% of the screen */
+    min-width: 230px;
+    padding-top: 10px;
+    background-color:#262424;
+
+}
+.sidebar--logo{
+    padding-bottom:20px !important;
+    color: var(--breeab-color) !important;
+    font-family: 'Permanent Marker', cursive !important;
+    text-shadow: 2px 2px #871287 !important;
+    font-weight: 300 !important;
+    font-size: 40px !important; 
+    margin-left: 20px !important;
+}
+.sidebar--post{
+    background-color: var(--breeab-color) !important; /* !important overrides the Mui theme*/
+    border-radius:0 !important;
+    border: none !important;
+    color:#E2E2E2 !important;
+    font-weight: 600 !important;
+    font-size: 20px !important; 
+    text-transform: inherit !important;
+    height: 50px !important;
+    margin-top: 50px !important;
+    font-family: 'Montserrat', sans-serif !important;
+
+}

@@ -1,0 +1,39 @@
+.feed{
+    flex: 0.6;
+    min-width: fit-content; /*it must to feet the content as the minimum width */
+    overflow-y: scroll;
+    -ms-overflow-style:none;
+    scrollbar-width:none ;
+
+}
+
+
+#scroll--style::-webkit-scrollbar
+{
+    width: 1px;
+}
+#scroll--style::-webkit-scrollbar-thumb
+{
+    background-color: var(--breeab-color);
+
+}
+
+/* 
+.feed::-webkit-scrollbar {
+  } */
+
+
+.feed--header{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding:15px 20px;
+    background-color: #c2164f80;
+    text-align: center;
+    /* border-bottom: 1px solid var(--breeab-color); */
+    
+}
+.feed--header > h2 {
+    font-size: 20px;
+    font-weight: 600;
+}

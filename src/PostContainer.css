@@ -1,0 +1,61 @@
+.post{
+    padding-bottom: 10px;
+    padding: 10px;
+
+}
+.post > form{
+    display: flex; 
+    flex-direction: column;
+    padding-bottom: 10px;
+
+    /* border-bottom: 1px solid white; */
+
+}
+.post--input{
+    display: flex;
+    padding:20px;
+
+}
+.post--input >input{
+    flex: 1;
+    margin-left: 10px;
+    font-size: 20px;
+    border: none;
+
+
+}
+input[type="text"]{
+    background-color: rgba(126, 126, 126, 0.083);
+    color:#E2E2E2;
+}
+.post--button{
+    background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
+    border: 1px solid  var(--breeab-color) !important;
+    border-radius:0 !important;
+    /* border: none !important; */
+    color:#E2E2E2 !important;
+    font-weight: 300 !important;
+    font-size: 20px !important; 
+    text-transform: inherit !important;
+    height: 40px !important;
+    width: 120px;
+    margin-top: 30px !important;
+    margin-left: auto !important;
+    font-family: 'Montserrat', sans-serif !important;
+    transition: all 0.4s ease-in !important;
+
+}
+.post--button:hover{
+    background-color: var(--breeab-color) !important; /* !important overrides the Mui theme*/
+    transition:all 0.4s ease-out !important;
+    border-radius:0 !important;
+    /* border: none !important; */
+    color:#E2E2E2 !important;
+    font-weight: 300 !important;
+    font-size: 20px !important; 
+    text-transform: inherit !important;
+    height: 40px !important;
+    width: 120px;
+    margin-top: 30px !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
