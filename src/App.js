@@ -1,8 +1,8 @@
 import './App.css';
-import Sidebar from './Sidebar';
-import Feed from './Feed';
-import './Widgets.css'
-import Widgets from './Widgets';
+import Sidebar from './Sidebar/Sidebar';
+import Feed from './Feed/Feed';
+import './Widgets/Widgets.css'
+import Widgets from './Widgets/Widgets';
 function App() {
   return (
     <div className="app">

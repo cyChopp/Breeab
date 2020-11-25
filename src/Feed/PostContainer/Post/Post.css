@@ -5,6 +5,8 @@
     margin: 20px;
     background-color: var(--breeab-background);
     border-radius: 20px !important;
+    transition: all 0.2s ease-out;
+
 
 }
 .post--avatar{
@@ -16,14 +18,14 @@
 }
 .post--body > img {
     border-radius:10px;
-    width: 100%;
+    max-width: 600px;
+    /* max-height: 600px; */
 }
 .post--header{
     padding-bottom:20px;
 }
-.post--textHeader{
-
-
+.post--textHeader > span{
+    font-size: 12px;
 }
 .post-verified{
     font-size: 12px;
@@ -38,7 +40,7 @@
 .post--description{
     word-wrap: break-word;
     margin: 10px 0px;
-    font-size: 15px;
+    font-size: 20px;
     max-width: 700px;
 }
 .post--userName{

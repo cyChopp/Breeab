@@ -1,5 +1,11 @@
 import firebase from "firebase";
 
+require("firebase/storage");
+require("firebase/auth");
+require("firebase/database");
+require("firebase/firestore");
+require("firebase/messaging");
+
 const firebaseConfig = {
   apiKey: "AIzaSyDA7EUacfAKpMmQSugSzkBXg8Mn5wIcpdQ",
   authDomain: "breeab-3218f.firebaseapp.com",
@@ -11,7 +17,7 @@ const firebaseConfig = {
   measurementId: "G-3E3C2WXX5Y",
 };
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
+const db = firebase.initializeApp(firebaseConfig);
+// const db = firebaseApp.firestore();
 
 export default db;

@@ -6,14 +6,17 @@ import RepeatRoundedIcon from "@material-ui/icons/RepeatRounded";
 import React , {forwardRef} from "react";
 import "./Post.css";
 
+
 const Post = forwardRef(({ 
     displayName,
     userName,
+    time,
     verified,
     text, 
     image, 
-    avatar 
+    avatar,
     },ref) => {
+
   return (
     <div className="feed--post" ref={ref}>
       <div className="post--avatar">
@@ -30,6 +33,8 @@ const Post = forwardRef(({
                 <span>{"  "} @{userName}</span>
               </span>
             </h3>
+            <span>{time}</span>
+
           </div>
 
           <div className="post--description">

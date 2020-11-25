@@ -1,6 +1,6 @@
 import React from "react";
 import './Sidebar.css';
-import HomeRoundedIcon from '@material-ui/icons/HomeRounded';import SidebarOption from "./SidebarOption";
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';import SidebarOption from "./SidebarOption/SidebarOption";
 import NotificationsRoundedIcon from '@material-ui/icons/NotificationsRounded';
 import MessageRoundedIcon from '@material-ui/icons/MessageRounded';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
