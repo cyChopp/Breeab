@@ -1,0 +1,30 @@
+.widgets{
+    flex: 0.1;
+    background-color: rgb(34, 34, 34);
+}
+.widgets--input{
+
+    display: flex;
+    align-items: center;
+    background-color: none;
+    border: 1px solid var(--breeab-color);
+    border-radius: 20px;
+    padding: 10px;
+    margin: 10px 10px 0px 10px;
+}
+
+.widgets--input > input{
+    max-width: 150px;
+
+    height: 20px;
+    border: none;
+    background-color: rgb(34, 34, 34);
+    font-size: 18px;
+
+    
+}
+input[type=text]:focus{
+    outline: none;
+    background-color: rgb(34, 34, 34);
+
+}
