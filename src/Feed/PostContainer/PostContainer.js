@@ -12,20 +12,19 @@ function PostContainer() {
     moment(Date().toLocaleString()).format("h:mm:ss a,Do YYYY")
   );
 
-  const imageInput = async (e) => { // uploads the file to storage and gives the url of it to setPostImage
-    debugger;
+  const imageInput = async (e) => {
+    // uploads the file to storage and gives the url of it to setPostImage
     const file = e.target.files[0];
     const storageRef = db.storage().ref();
     const fileRef = storageRef.child(file.name);
     await fileRef.put(file);
-    setPostImage( await fileRef.getDownloadURL());
+    setPostImage(await fileRef.getDownloadURL());
   };
 
   const addPost = (e) => {
     e.preventDefault();
     setTime(moment(Date().toLocaleString()).format("h:mm:ss a,  Do YYYY"));
 
-    debugger;
     db.firestore().collection("posts").add({
       displayName: "Alex Louttchenko",
       userName: "loottch",
@@ -51,12 +50,17 @@ function PostContainer() {
             onChange={(e) => setPostMessage(e.target.value)}
           />
         </div>
-        {/* <input placeholder="Enter image URL" className="imageInput" type="text" /> */}
-
-        <input type="file" onChange={imageInput} />
-        <Button type="submit" className="post--button">
-          Post
-        </Button>
+        <div className="input-buttons">
+          <span className="file__uploadWrapper">
+            <label for="file-upload" class="custom-file-upload">
+              Upload file
+            </label>
+          </span>
+          <input id="file-upload" type="file" onChange={imageInput} />
+          <Button type="submit" className="post--button">
+            Post
+          </Button>
+        </div>
       </form>
     </div>
   );

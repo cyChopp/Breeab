@@ -1,3 +1,7 @@
+label{
+    padding: 0;
+    margin: 0;
+}
 .post{
     margin-top: -20px;
 }
@@ -14,6 +18,7 @@
 }
 .post--input{
     display: flex;
+    align-items: center;
     padding:20px 0px 10px 20px;
 
 
@@ -27,29 +32,18 @@
 
 }
 
-textarea[type="text"]{
-    background-color: rgba(126, 126, 126, 0.083);
-    color:#E2E2E2;
-    font-size: 17px;
-    resize: none;
-}
+
 input[type="text"]{
     background-color: rgba(126, 126, 126, 0.083);
     color:#E2E2E2;
     font-size: 17px;
     resize: none;
 }
-textarea[type=text]:focus{
-    outline: none;
-    background-color: rgb(34, 34, 34);
 
+input[type="file"] {
+    display: none;
 }
-textarea::-webkit-scrollbar
-{
-        display: none 
-
-} 
-.post--Upload{
+.custom-file-upload {
     background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
     border-radius: 18px !important;
@@ -62,9 +56,10 @@ textarea::-webkit-scrollbar
     font-family: 'Montserrat', sans-serif !important;
     transition: all 0.1s ease-in !important;
     margin-right: 20px !important;
-
+    padding: 7px !important;
 }
-.post--Upload:hover{
+
+.custom-file-upload:hover{
     background-color:rgba(90, 90, 90, 0.474) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
     border-radius: 10px !important;
@@ -72,6 +67,26 @@ textarea::-webkit-scrollbar
     text-transform: inherit !important;
 
 }
+
+textarea[type="text"]{
+    background-color: rgba(126, 126, 126, 0.083);
+    color:#E2E2E2;
+    font-size: 17px;
+    resize: none;
+}
+
+textarea[type=text]:focus{
+    outline: none;
+    background-color: rgb(34, 34, 34);
+
+}
+textarea::-webkit-scrollbar
+{
+        display: none 
+
+} 
+
+
 .post--button{
     background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
@@ -102,5 +117,10 @@ padding-right: 20px;
 padding-bottom: 20px;
 margin-top: 30px !important;
  margin-left: auto !important;
+
+}
+
+.input-buttons > span{
+    padding-top: 8px !important;
 
 }

@@ -10,10 +10,22 @@ function Feed() {
 
   
   useEffect(() => {
-    db.firestore().collection("posts").orderBy('time','desc').onSnapshot((snapshot) =>
-      setPosts(snapshot.docs.map((doc) => doc.data()))
+    db.firestore().collection("posts").orderBy('time','desc').onSnapshot((snapshot) =>{
+      setPosts(snapshot.docs.map((doc) =>({...doc.data(),id:doc.id})))
+      console.log(snapshot.docs)
+    }
     );
+    // const fetchData = async ()=>{
+    //   const data =await db.firestore().collection('posts').orderBy('time','desc').get();
+    //     data.forEach(doc=>console.log(doc.id))
+
+    //   setPosts(data.docs.map(doc=>({...doc.data(),id:doc.id})))
+    // };
+
+    // fetchData();
+
   }, []);
+
   return (
     <div className="feed " id="scroll--style">
       <div className="feed--header">
@@ -29,6 +41,7 @@ function Feed() {
             text={post.text}
             image={post.image}
             avatar={post.avatar}
+            post={post}
           />
         ))}
 
