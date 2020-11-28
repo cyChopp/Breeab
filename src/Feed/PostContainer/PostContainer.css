@@ -43,7 +43,7 @@ input[type="text"]{
 input[type="file"] {
     display: none;
 }
-.custom-file-upload {
+.custom__FileUpload {
     background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
     border-radius: 18px !important;
@@ -59,12 +59,13 @@ input[type="file"] {
     padding: 7px !important;
 }
 
-.custom-file-upload:hover{
+.custom__FileUpload:hover{
     background-color:rgba(90, 90, 90, 0.474) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
     border-radius: 10px !important;
     color:#ffffff !important;
     text-transform: inherit !important;
+    cursor: pointer;
 
 }
 
@@ -87,28 +88,32 @@ textarea::-webkit-scrollbar
 } 
 
 
-.post--button{
+.post--buttonWrapper{
     background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
     border-radius: 18px !important;
-    color:#E2E2E2 !important;
-    font-weight: 300 !important;
-    font-size: 20px !important; 
-    text-transform: inherit !important;
     height: 40px !important;
-    width: 120px;
-    font-family: 'Montserrat', sans-serif !important;
     transition: all 0.1s ease-in !important;
     display: flex;
 
 }
-.post--button:hover{
+.post--buttonWrapper:hover{
     background-color: var(--breeab-color) !important; /* !important overrides the Mui theme*/
     transition:all 0.1s ease-out !important;
     border-radius: 10px !important;
     color:#E2E2E2 !important;
     font-weight: 300 !important;
     text-transform: inherit !important;
+}
+.post--button{
+
+    color:#E2E2E2 !important;
+    font-weight: 300 !important;
+    font-size: 20px !important; 
+    text-transform: inherit !important;
+    width: 120px;
+    font-family: 'Montserrat', sans-serif !important;
+
 }
 
 .input-buttons{
@@ -119,8 +124,18 @@ margin-top: 30px !important;
  margin-left: auto !important;
 
 }
-
+/* 
 .input-buttons > span{
-    padding-top: 8px !important;
 
+} */
+.file__uploadWrapper{
+    cursor: pointer;
+    padding-top: 8px !important;
+    
+
+}
+.preloader__Wrapper{
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
 }
