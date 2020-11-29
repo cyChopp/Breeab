@@ -1,4 +1,4 @@
-.feed{
+.profile__feed{
     flex: 0.7;
     min-width: fit-content; /*it must to feet the content as the minimum width */
     overflow-y: scroll;
@@ -7,24 +7,7 @@
 
 }
 
-
-/* #scroll--style::-webkit-scrollbar
-{
-    width: 1px;
-}
-#scroll--style::-webkit-scrollbar-thumb
-{
-    background-color: var(--breeab-color);
-
-} */
-
-
-.feed::-webkit-scrollbar {
-    display: none
-  } 
-
-
-.feed--header{
+.profile__header{
     position: sticky;
     top: 0;
     z-index: 2;
@@ -36,7 +19,7 @@
     border-bottom-left-radius: 20px;
     
 }
-.feed--header > h2 {
+.profile__header > h2 {
     font-size: 20px;
     font-weight: 600;
     padding-bottom: 5px;

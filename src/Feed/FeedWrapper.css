@@ -1,0 +1,20 @@
+.feed{
+    flex: 0.7;
+    min-width: fit-content; /*it must to feet the content as the minimum width */
+    overflow-y: scroll;
+    -ms-overflow-style:none;
+    scrollbar-width:none ;
+
+}
+
+
+.feed::-webkit-scrollbar {
+    display: none
+  } 
+
+.feed > form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

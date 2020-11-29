@@ -1,10 +1,14 @@
+a{
+    text-decoration: none;
+    color: inherit;
+}
 .sidebar{
     flex: 0.2; /* use 20% of the screen */
     min-width: 230px;
     padding-top: 10px;
     background-color:rgb(38, 36, 36);
-
 }
+
 .sidebar--logo{
     padding-bottom:20px !important;
     color: var(--breeab-color) !important;

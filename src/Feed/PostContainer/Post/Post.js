@@ -20,12 +20,17 @@ const Post = forwardRef(({ post }, ref) => {
 
   return (
     <div className="feed--post" ref={ref}>
+
       <div className="post--avatar">
         <Avatar src={post.avatar} />
       </div>
+
       <div className="post--body">
+
         <div className="post--header">
+
           <div className="post--textHeader">
+
             <h3 className="user__Infowrapper">
               <span className="post--userName">
                 {post.displayName}
@@ -40,22 +45,23 @@ const Post = forwardRef(({ post }, ref) => {
                 </span>
               </span>
             </h3>
-            <div className="auxiliary__ButtonsWrapper">
-            <span className="edit__PostWrapper">
-              {/* onClick={onUpdate} */}
-              <EditButton postText={post.text} post={post} />
-            </span>
-            <span className="delete__PostWrapper">
-              <DeleteIcon onClick={onDelete} />
-            </span>
-            </div>
-          </div>
-          <span className="post__time">{post.time}</span>
 
+            <div className="auxiliary__ButtonsWrapper">
+              <span className="edit__PostWrapper">
+                {/* onClick={onUpdate} */}
+                <EditButton postText={post.text} post={post} />
+              </span>
+              <span className="delete__PostWrapper">
+                <DeleteIcon onClick={onDelete} />
+              </span>
+            </div>
+            
+          </div>
+
+          <span className="post__time">{post.time}</span>
 
           <div className="post--description">
             <p>{post.text}</p>
-            {/* <input value={text} onChange={e=>{setText(e.target.value)}}/> */}
           </div>
         </div>
 
@@ -67,6 +73,7 @@ const Post = forwardRef(({ post }, ref) => {
           <RepeatRoundedIcon />
         </div>
       </div>
+
     </div>
   );
 });
