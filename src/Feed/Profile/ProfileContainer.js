@@ -7,15 +7,18 @@ import moment from "moment";
 
 import "./ProfileContainer.css";
 import {
+  Avatar,
   Button,
   CircularProgress,
   Container,
   createMuiTheme,
   IconButton,
+  makeStyles,
   TextField,
   ThemeProvider,
   Tooltip,
 } from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
 import Grid from "@material-ui/core/Grid";
 import {
   KeyboardDatePicker,
@@ -38,13 +41,28 @@ import { compose } from "redux";
 import { PrivateRouteHoc } from "../../hoc/PrivateRouteHoc";
 import ProfileInfoHoc from "../../hoc/ProfileInfoHoc";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  large: {
+    width: theme.spacing(30),
+    height: theme.spacing(30),
+  },
+}));
+
 const ProfileContainer = (props) => {
-  const [postImage, setPostImage] = useState("");
+  const [postImage, setPostImage] = useState(props.image);
   const [status, setStatus] = useState(props.status);
   const [fullname, setFullName] = useState(props.fullname);
   const [location, setLocation] = useState(props.location);
-  const [username,setUsername] = useState(props.username)
-  
+  const [username, setUsername] = useState(props.username);
+
+  const [isFetching, setIsFetching] = useState(false);
+
   const [isDisabled, setIsDisabled] = useState(true);
 
   let history = useHistory();
@@ -63,7 +81,7 @@ const ProfileContainer = (props) => {
   });
 
   const imageInput = async (e) => {
-    props.setIsFetching(true);
+    setIsFetching(true);
 
     // uploads the file to storage and gives the url of it to setPostImage
     const file = e.target.files[0];
@@ -77,10 +95,14 @@ const ProfileContainer = (props) => {
     fileRef.getDownloadURL().then((url) => {
       setPostImage(url);
       console.log("uloaded");
-      props.setIsFetching(false);
+      setIsFetching(false);
     });
   };
 
+  const handleEditProfile = () => {
+    const fileInput = document.getElementById("imageInput");
+    fileInput.click();
+  };
 
   // const handleLogOut = async () => {
   //   console.log("Logged out!");
@@ -95,16 +117,15 @@ const ProfileContainer = (props) => {
   //   history.push("/signup");
   // };
 
-//--------- SAVE INFO --------- 
+  //--------- SAVE INFO ---------
   const onSubmit = (data) => {
-    // let dateFormatted = moment(data.date).format("L");
-console.log(data,";;;::::DATA");
-
+    console.log(postImage,"IMAGE:::::")
     props.setUserInfoThunk(
       data.fullname,
       data.username,
       data.status,
       data.location,
+      postImage,
       props.currentUserId
     );
     setIsDisabled(!isDisabled);
@@ -114,20 +135,29 @@ console.log(data,";;;::::DATA");
     setIsDisabled(!isDisabled);
   };
 
-//---------  HOOKS ---------  
+  //---------  HOOKS ---------
   useEffect(() => {
-    console.log("use EFFECT");
-
     setFullName(props.fullName);
     setStatus(props.status);
     setLocation(props.location);
     setUsername(props.username);
+    setPostImage(props.image)
 
-  }, [props.fullname, props.status, props.location, props.date,props.username]);
+  }, [
+    props.fullname,
+    props.status,
+    props.location,
+    props.date,
+    props.username,
+    props.image
+  ]);
 
   const { register, handleSubmit, errors, control } = useForm();
 
+  const classes = useStyles();
+
   return (
+   
     <FeedWrapper>
       <StickyTop header={"Profile"} />
       {/* <Tooltip title="Logout" placement="top">
@@ -135,23 +165,36 @@ console.log(data,";;;::::DATA");
           <KeyboardReturn color="secondary" />
         </IconButton>
       </Tooltip> */}
-
-      <div className="input__Buttons">
-        <div className="preloader__Wrapper">
-          <CircularProgress color="secondary" size={20} />
+    <div className={!isDisabled ? "profile__Enabled" : "profile__Disabled"}>
+      <div className="profile__UploadWrapper">
+      <div className="profile__Wrapper">
+        <div className="profile__Picture">
+          <div className={classes.root}>
+            <Avatar src={postImage} className={classes.large} />
+          </div>
         </div>
 
-        <div className="file__uploadWrapper">
-          <span>
-            <label className="custom__FileUpload">
-              {/* <label for="file-upload" className="custom__FileUpload"> */}
-              Upload file
-            </label>
-          </span>
-          <input id="file-upload" type="file" onChange={imageInput} />
+        <div className="upload__ProfileButtons">
+          <div >
+            <input
+              id="imageInput"
+              type="file"
+              hidden="hidden"
+              onChange={imageInput}
+            />
+            <IconButton onClick={handleEditProfile} disabled={isDisabled}>
+              <EditIcon color="secondary" />
+            </IconButton>
+          </div>
+          <div >
+          {isFetching && (
+            <div >
+              <CircularProgress color="secondary" size={20} />
+            </div>
+          )}
+          </div>
         </div>
-
-        <button type="submit">Submit Info</button>
+        </div>
       </div>
 
       <ThemeProvider theme={theme}>
@@ -159,7 +202,7 @@ console.log(data,";;;::::DATA");
           <div className="container">
             <Container className="form__Wrapper" maxWidth="xs">
               <form onSubmit={handleSubmit(onSubmit)} className="dialog__Input">
-              <TextField
+                <TextField
                   inputRef={register}
                   defaultValue={username}
                   required
@@ -247,6 +290,8 @@ console.log(data,";;;::::DATA");
           <CircularProgress color="secondary" size={20} />
         )}
       </ThemeProvider>
+      </div>
+
     </FeedWrapper>
   );
 };
@@ -257,11 +302,11 @@ const mapStateToProps = (state) => ({
   fullname: state.profile.fullname,
   location: state.profile.location,
   date: state.profile.date,
+  image:state.profile.image,
   currentUserId: state.auth.currentUserId,
 });
 
 export default compose(
-  
   PrivateRouteHoc,
   ProfileInfoHoc,
   connect(mapStateToProps, {

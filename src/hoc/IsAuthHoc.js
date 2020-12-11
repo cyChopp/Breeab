@@ -14,12 +14,16 @@ const IsAuthHoc = (Component) => {
   const NewComponent = (props) => {
 
 
+    const history  = useHistory();
+
+
     useEffect(() => {
       db.auth().onAuthStateChanged((u) => {
         if (u) {
           props.getUserInfoThunk(u.uid);
           props.setIsProfileFetching(true);// every refresh set the 
-            
+        }else{
+          history.push('/signup')
         }
       });
     }, []);

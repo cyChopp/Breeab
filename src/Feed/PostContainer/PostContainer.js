@@ -1,4 +1,4 @@
-import { Avatar, Button, CircularProgress } from "@material-ui/core";
+import { Avatar, Button, CircularProgress, TextField } from "@material-ui/core";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -13,11 +13,12 @@ import { compose } from "redux";
 import { useHistory } from "react-router-dom";
 
 function PostContainer(props) {
-  const [text, setText] = useState(props.postText);
+  const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState("");
+  const [profileImage,setProfileImage] = useState(props.image);
   const [isFetching, setIsFetching] = useState(false);
 
-  const { register, handleSubmit ,control} = useForm();
+  const { register, handleSubmit ,reset} = useForm();
 
   const history = useHistory();
 
@@ -48,51 +49,82 @@ function PostContainer(props) {
   };
 
   // ------------ ADD POST ---------------
-  const addPost = (data) => {
-    if (postImage !== "" || postMessage !== "") {
-      // e.preventDefault();
+  const addPost = (data,e) => {
 
+e.preventDefault()
+
+     setPostText(data.postText);
+      setPostImage(postImage);
+
+    if (data.postImage != "" || data.postText != "") {
+      // e.preventDefault();
+      console.log(data,'post data')
+      console.log(
+        props.fullname,":",
+        props.username,":",
+        time,":",
+        data.postText,":",
+        postImage,":",
+        props.currentUserId,'post data')
       setTime(moment(Date().toLocaleString()).format("Do hh:mm:ss a YYYY"));
 
       props.setPostThunk(
         props.fullname,
         props.username,
-        data.time,
-        data.text,
-        data.postImage,
+        time,
+        data.postText,
+        postImage,
+        profileImage,
         props.currentUserId
       );
 
-      setText("");
+      setPostText("");
       setPostImage("");
+
     } else {
       alert("Your post should contain text or image!");
     }
+
+          
+   
   };
 
   useEffect(() => {
-    setText(props.postText);
-  }, [props.postText]);
+   setPostText("")
+  }, [postText])
+
 
   return (
     <div className="post">
-      <form onSubmit={handleSubmit(addPost)()}>
+      <form onSubmit={handleSubmit(addPost)}>
+
         <div className="post--input">
-          <Avatar className="profile" />
-          <Controller
+          <Avatar className="profile" src={profileImage} />
+          {/* <Controller
             as={<input />}
-            name="text"
+            name="postText"
             control={control}
-            defaultValue={text}
+            defaultValue={postText}
             placeholder="Write your post!"
-          />
+          /> */}
           {/* <input
             ref={register}
-            name="text"
-            value={text}
+            name="postText"
+            // value={postText}
+            // defaultValue={postText}
             placeholder="Write your post!"
             type="text"
           /> */}
+           <TextField
+                  inputRef={register}
+                  defaultValue={postText}
+                  fullWidth
+                  variant="outlined"
+                  margin="normal"
+                  id="postText"
+                  label="Post"
+                  name="postText"
+                />
         </div>
 
         <div className="input-buttons">
@@ -124,10 +156,11 @@ function PostContainer(props) {
 }
 
 const mapStateToProps = (state) => ({
-  postText: state.post.postText,
   currentUserId: state.auth.currentUserId,
   fullname: state.profile.fullname,
   username: state.profile.username,
+  image:state.profile.image
+
 });
 
 export default compose(

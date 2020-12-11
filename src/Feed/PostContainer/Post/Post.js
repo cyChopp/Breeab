@@ -1,4 +1,4 @@
-import { Avatar } from "@material-ui/core";
+import { Avatar, makeStyles } from "@material-ui/core";
 import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
 import TextsmsRoundedIcon from "@material-ui/icons/TextsmsRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -10,12 +10,31 @@ import React, { forwardRef, useEffect, useState } from "react";
 import "./Post.css";
 import db from "../../../firebase";
 import EditButton from "../../../DeleteButton/EditButton";
+import { connect } from "react-redux";
 
-const Post = forwardRef(({ post }, ref) => {
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+
+  large: {
+    width: theme.spacing(6),
+    height: theme.spacing(6),
+  },
+}));
+
+
+const Post =forwardRef(({ post }, ref)=> {
   const [text, setText] = useState(post.text);
   const [uuid,setUuid] = useState('');// CHANGEEEEEEEEEEEEE
+
+
+  const classes = useStyles();
   
-  console.log(post)
   const onDelete = () => {
     // db.auth().onAuthStateChanged((u) => {
       // if (u) {
@@ -25,13 +44,17 @@ const Post = forwardRef(({ post }, ref) => {
     // })
   };
 
+
   return (
     <div className="feed--post" ref={ref}>
 
-      {/* <div className="post--avatar">
-        <Avatar src={post.avatar} />
-      </div> */}
-
+    <div className={classes.root}>
+      <div className="post--avatar">
+        <Avatar src={post.profile} className={classes.large} />
+        {/* <Avatar src={(post.profile === props.image)? (post.profile): (props.image)} className={classes.large} /> */}
+      </div>
+    </div>
+    {/* src={post.avatar} */}
       <div className="post--body">
 
         <div className="post--header">
@@ -87,4 +110,8 @@ const Post = forwardRef(({ post }, ref) => {
   );
 });
 
-export default Post;
+const mapStateToProps = (state)=>({
+  image:state.profile.image
+})
+
+export default connect(mapStateToProps)(Post);

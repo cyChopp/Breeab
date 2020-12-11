@@ -7,6 +7,7 @@ const SET_USER_NAME = "SET_USER_NAME";
 const SET_USER_LOCATION = "SET_USER_LOCATION";
 const SET_USER_DATE = "SET_USER_DATE";
 const SET_IS_PROFILE_FETCHING = "SET_IS_PROFILE_FETCHING";
+const SET_IMAGE = "SET_IMAGE";
 
 const initialState = {
   status: "",
@@ -14,7 +15,9 @@ const initialState = {
   username: "none",
   location: "",
   date: "04/04/2020",
+  image:"",
   isProfileFetching: true,
+
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -49,6 +52,11 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         isProfileFetching: action.info,
       };
+    case SET_IMAGE:
+      return {
+        ...state,
+        image: action.image,
+      };
 
     default:
       return state;
@@ -80,14 +88,19 @@ export const setIsProfileFetching = (info) => ({
   type: SET_IS_PROFILE_FETCHING,
   info,
 });
+export const setImage = (image) => ({
+  type: SET_IMAGE,
+  image,
+});
 
-export const setUserInfoThunk = (fullname, username, status, location, uid) => {
+export const setUserInfoThunk = (fullname, username, status, location,image, uid) => {
   return async (dispatch) => {
-    await userAPI.setProfileInfo(fullname, username, status, location, uid);
+    await userAPI.setProfileInfo(fullname, username, status, location,image, uid);
     dispatch(setUserStatus(status));
     dispatch(setFullName(fullname));
     dispatch(setUserName(username));
     dispatch(setUserLocation(location));
+    dispatch(setImage(image));
   };
 };
 
@@ -98,7 +111,7 @@ export const getUserThunk = (uid) => {
     dispatch(setFullName(userInfo.data().fullname));
     dispatch(setUserStatus(userInfo.data().status));
     dispatch(setUserLocation(userInfo.data().location));
-    // dispatch(setUserDate(userInfo.data().date))
+    dispatch(setImage(userInfo.data().image))
     dispatch(setIsProfileFetching(false));
   };
 };

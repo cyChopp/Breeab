@@ -17,7 +17,7 @@ export const authAPI = {
         authAPI.setUserAuthInfo(u.user.email, u.user.uid);
         if(u.user.uid){
           console.log(u.user.uid,"check")
-        userAPI.setProfileInfo("","","","",u.user.uid)
+        userAPI.setProfileInfo("","","","","",u.user.uid)
         }
       });
   },
@@ -80,7 +80,7 @@ export const userAPI = {
     //     }
     // });
 
-  setProfileInfo(fullname,username, status, location, uid) {
+  setProfileInfo(fullname,username, status, location,image, uid) {
     console.log('in Procces!')
     return db.firestore().collection("users").doc(uid)
     .set({
@@ -88,6 +88,8 @@ export const userAPI = {
       fullname: fullname,
       username:username,
       location: location,
+      image:image
+      
     });
   },
 
@@ -98,7 +100,7 @@ export const userAPI = {
 
 export const postsAPI = {
 
-  addPost(fullname, username,time, postMessage,postImage, uid) {
+  addPost(fullname, username,time, postMessage,postImage,profile, uid) {
     return db.firestore().collection("posts").doc(uid).collection("userPosts")
       .add({
         fullname: fullname,
@@ -106,6 +108,7 @@ export const postsAPI = {
         time: time,
         text: postMessage,
         image: postImage,
+        profile:profile
       });
   },
 
