@@ -1,10 +1,10 @@
 import firebase from "firebase";
 
-require("firebase/storage");
-require("firebase/auth");
-require("firebase/database");
-require("firebase/firestore");
-require("firebase/messaging");
+import "firebase/auth";
+import "firebase/storage";
+import "firebase/database";
+import "firebase/firestore";
+import "firebase/messaging";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDA7EUacfAKpMmQSugSzkBXg8Mn5wIcpdQ",

@@ -13,17 +13,24 @@ import EditButton from "../../../DeleteButton/EditButton";
 
 const Post = forwardRef(({ post }, ref) => {
   const [text, setText] = useState(post.text);
-
+  const [uuid,setUuid] = useState('');// CHANGEEEEEEEEEEEEE
+  
+  console.log(post)
   const onDelete = () => {
-    db.firestore().collection("posts").doc(post.id).delete();
+    // db.auth().onAuthStateChanged((u) => {
+      // if (u) {
+        // setUuid(u.uid);
+    // db.firestore().collection("posts").doc(u.uid).collection('userPosts').doc(post.id).delete();
+      // }
+    // })
   };
 
   return (
     <div className="feed--post" ref={ref}>
 
-      <div className="post--avatar">
+      {/* <div className="post--avatar">
         <Avatar src={post.avatar} />
-      </div>
+      </div> */}
 
       <div className="post--body">
 
@@ -33,26 +40,28 @@ const Post = forwardRef(({ post }, ref) => {
 
             <h3 className="user__Infowrapper">
               <span className="post--userName">
-                {post.displayName}
+              {post.fullname}
                 {"  "}
               </span>
               <span className="post-verified">
-                {post.verified && (
+                {/* {post.verified && ( */}
+                {"  "}
                   <VerifiedUserRoundedIcon className="post--budge" />
-                )}
+                {/* )} */}
                 <span>
-                  {"  "} @{post.userName}
+                  {"  "} {post.username}
                 </span>
               </span>
             </h3>
 
+                  {/* if the post was created by the user, show  edit and delete button */}
             <div className="auxiliary__ButtonsWrapper">
               <span className="edit__PostWrapper">
                 {/* onClick={onUpdate} */}
-                <EditButton postText={post.text} post={post} />
+                {/* <EditButton postText={post.text} post={post} currentUserId={uuid} /> */}
               </span>
               <span className="delete__PostWrapper">
-                <DeleteIcon onClick={onDelete} />
+                {/* <DeleteIcon onClick={onDelete} /> */}
               </span>
             </div>
             

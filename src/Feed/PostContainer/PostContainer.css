@@ -33,7 +33,7 @@ label{
 }
 
 
-input[type="text"]{
+input[type]{
     background-color: rgba(126, 126, 126, 0.083);
     color:#E2E2E2;
     font-size: 17px;

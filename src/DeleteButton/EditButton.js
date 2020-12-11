@@ -51,6 +51,8 @@ const EditButton = (props) => {
   const onUpdate = () => {
     db.firestore()
       .collection("posts")
+      .doc(props.currentUserId)
+      .collection('userPosts')
       .doc(props.post.id)
       .set({ ...props.post, text });
     setOpen(false);
