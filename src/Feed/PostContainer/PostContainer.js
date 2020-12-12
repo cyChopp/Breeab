@@ -1,4 +1,11 @@
-import { Avatar, Button, CircularProgress, TextField } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  CircularProgress,
+  createMuiTheme,
+  TextField,
+  ThemeProvider,
+} from "@material-ui/core";
 import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -11,11 +18,20 @@ import "./PostContainer.css";
 import PostInfoHoc from "../../hoc/PostInfoHoc";
 import { compose } from "redux";
 import { useHistory } from "react-router-dom";
+import ProfileInfoHoc from "../../hoc/ProfileInfoHoc";
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark",
+    primary: {
+      main: "#c2164f",
+    },
+  },
+});
 
 function PostContainer(props) {
-  const [postText, setPostText] = useState("");
   const [postImage, setPostImage] = useState("");
-  const [profileImage,setProfileImage] = useState(props.image);
+  const [profileImage, setProfileImage] = useState(props.image);
   const [isFetching, setIsFetching] = useState(false);
 
   const { register, handleSubmit ,reset} = useForm();
@@ -49,23 +65,29 @@ function PostContainer(props) {
   };
 
   // ------------ ADD POST ---------------
-  const addPost = (data,e) => {
+  const addPost = (data, e) => {
+    e.preventDefault();
 
-e.preventDefault()
-
-     setPostText(data.postText);
-      setPostImage(postImage);
+    setPostText(data.postText);
+    setPostImage(postImage);
 
     if (data.postImage != "" || data.postText != "") {
       // e.preventDefault();
-      console.log(data,'post data')
+      console.log(data, "post data");
       console.log(
-        props.fullname,":",
-        props.username,":",
-        time,":",
-        data.postText,":",
-        postImage,":",
-        props.currentUserId,'post data')
+        props.fullname,
+        ":",
+        props.username,
+        ":",
+        time,
+        ":",
+        data.postText,
+        ":",
+        postImage,
+        ":",
+        props.currentUserId,
+        "post data"
+      );
       setTime(moment(Date().toLocaleString()).format("Do hh:mm:ss a YYYY"));
 
       props.setPostThunk(
@@ -77,80 +99,62 @@ e.preventDefault()
         profileImage,
         props.currentUserId
       );
-
-      setPostText("");
-      setPostImage("");
-
+        e.target.reset()
     } else {
       alert("Your post should contain text or image!");
     }
-
-          
-   
   };
 
   useEffect(() => {
-   setPostText("")
-  }, [postText])
-
+  }, []);
 
   return (
     <div className="post">
-      <form onSubmit={handleSubmit(addPost)}>
-
-        <div className="post--input">
-          <Avatar className="profile" src={profileImage} />
-          {/* <Controller
-            as={<input />}
-            name="postText"
-            control={control}
-            defaultValue={postText}
-            placeholder="Write your post!"
-          /> */}
-          {/* <input
-            ref={register}
-            name="postText"
-            // value={postText}
-            // defaultValue={postText}
-            placeholder="Write your post!"
-            type="text"
-          /> */}
-           <TextField
-                  inputRef={register}
-                  defaultValue={postText}
-                  fullWidth
-                  variant="outlined"
-                  margin="normal"
-                  id="postText"
-                  label="Post"
-                  name="postText"
-                />
-        </div>
-
-        <div className="input-buttons">
-          {isFetching && (
-            <div className="preloader__Wrapper">
-              <CircularProgress color="secondary" size={20} />
+      <ThemeProvider theme={theme}>
+        <form onSubmit={handleSubmit(addPost)}>
+          <div className="post__input">
+            <div className="profile">
+              <Avatar src={profileImage} />
             </div>
-          )}
-
-          <div className="file__uploadWrapper">
-            <span>
-              {/* <label  className="custom__FileUpload"> */}
-              <label htmlFor="file-upload" className="custom__FileUpload">
-                Upload file
-              </label>
-            </span>
-            <input id="file-upload" type="file" onChange={imageInput} />
+            <div className="post__TextContainer">
+              <TextField
+                inputRef={register}
+                defaultValue=""
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                id="postText"
+                label="Post"
+                name="postText"
+              />
+            </div>
           </div>
 
-          <div className="post--buttonWrapper">
-            <Button type="submit" className="post--button">
-              Post
-            </Button>
+          <div className="input-buttons">
+            {isFetching && (
+              <div className="preloader__Wrapper">
+                <CircularProgress color="secondary" size={20} />
+              </div>
+            )}
+
+            <div className="file__uploadWrapper">
+              <span>
+                {/* <label  className="custom__FileUpload"> */}
+                <label htmlFor="file-upload" className="custom__FileUpload">
+                  Upload file
+                </label>
+              </span>
+              <input id="file-upload" type="file" onChange={imageInput} />
+            </div>
+
+            <div className="post--buttonWrapper">
+              <Button type="submit" className="post--button">
+                Post
+              </Button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </ThemeProvider>
     </div>
   );
 }
@@ -159,11 +163,11 @@ const mapStateToProps = (state) => ({
   currentUserId: state.auth.currentUserId,
   fullname: state.profile.fullname,
   username: state.profile.username,
-  image:state.profile.image
-
+  image: state.profile.image,
 });
 
 export default compose(
   PostInfoHoc,
+  ProfileInfoHoc,
   connect(mapStateToProps, { setPostText, setPostThunk })
 )(PostContainer);

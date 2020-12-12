@@ -79,7 +79,7 @@ const EditButton = (props) => {
           {/* <DialogContentText></DialogContentText> */}
           <TextFieldCustomized
             autoFocus
-            value={text}
+            defaultValue={props.post.text}
             onChange={(e) => {
               setText(e.target.value);
             }}

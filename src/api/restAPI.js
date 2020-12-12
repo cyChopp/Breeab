@@ -114,4 +114,8 @@ export const postsAPI = {
 
 };
 
-//        username: 'username',
+export const postGet = async()=>{
+ const info =  await db.firestore().collection("posts").get()
+ console.log(info[0])
+}
+

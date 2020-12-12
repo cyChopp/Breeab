@@ -26,11 +26,12 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { connect } from "react-redux";
-import { setUserEmail, setCurrentUserId } from "../../redux/authentication";
+import { signOutThunk} from "../../redux/authentication";
 import {
   setUserName,
   setFullName,
   setUserInfoThunk,
+  withSignOutThunk
 } from "../../redux/profile-reducer";
 import { setIsFetching } from "../../redux/home-reducer";
 
@@ -104,18 +105,18 @@ const ProfileContainer = (props) => {
     fileInput.click();
   };
 
-  // const handleLogOut = async () => {
-  //   console.log("Logged out!");
+  const handleLogOut = () => {
+    console.log("Logged out!");
 
-  //   props.setCurrentUserId("");
-  //   props.setFullName("");
-  //   props.setUserName("");
-  //   props.setUserEmail("");
+    // props.setCurrentUserId("");
+    // props.setFullName("");
+    // props.setUserName("");
+    // props.setUserEmail("");
+// props.signOutThunk()
+    props.withSignOutThunk() 
 
-  //   await userAPI.signOut();
-
-  //   history.push("/signup");
-  // };
+    history.push("/signup");
+  };
 
   //--------- SAVE INFO ---------
   const onSubmit = (data) => {
@@ -160,11 +161,12 @@ const ProfileContainer = (props) => {
    
     <FeedWrapper>
       <StickyTop header={"Profile"} />
-      {/* <Tooltip title="Logout" placement="top">
+      <Tooltip title="Logout" placement="top">
         <IconButton onClick={handleLogOut}>
           <KeyboardReturn color="secondary" />
+          <span>Log out</span>
         </IconButton>
-      </Tooltip> */}
+      </Tooltip>
     <div className={!isDisabled ? "profile__Enabled" : "profile__Disabled"}>
       <div className="profile__UploadWrapper">
       <div className="profile__Wrapper">
@@ -250,33 +252,6 @@ const ProfileContainer = (props) => {
                   label="Location"
                   id="location"
                 />
-                {/* <TextField
-                  inputRef={register}
-                  defaultValue={date}
-                  fullWidth
-                  disabled={isDisabled}
-                  variant="outlined"
-                  margin="normal"
-                  name="age"
-                  label="Date of birth."
-                  id="age"
-                /> */}
-                {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Grid container>
-                    <KeyboardDatePicker
-                        inputRef={register}
-                        defaultValue={date}
-                        label="Date of birth"
-                        name="date"
-                        fullWidth
-                        disabled={isDisabled}
-                        format="MM/dd/yyyy"
-                        margin="normal"
-                        id="date-picker-dialog"
-                        InputProps={{ className: "dialog__Input" }}
-                       /> 
-                  </Grid>
-                </MuiPickersUtilsProvider> */}
                 <Button variant="outlined" color="primary" type="submit">
                   Save
                 </Button>
@@ -311,7 +286,8 @@ export default compose(
   ProfileInfoHoc,
   connect(mapStateToProps, {
     setIsFetching,
-
+    withSignOutThunk,
+    signOutThunk,
     setUserInfoThunk,
   })
 )(ProfileContainer);

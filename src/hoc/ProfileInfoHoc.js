@@ -16,7 +16,6 @@ const ProfileInfoHoc = (Component) => {
 
         useEffect(() => {
             
-            console.log(props.currentUserId,"lkjasldkjf:::::")
             props.getUserThunk(props.currentUserId)
 
         }, [props.currentUserId])

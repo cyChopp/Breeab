@@ -12,11 +12,10 @@ import db from "../../../firebase";
 import EditButton from "../../../DeleteButton/EditButton";
 import { connect } from "react-redux";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > *': {
+    display: "flex",
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -27,77 +26,81 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Post = forwardRef((props, ref) => {
+  console.log(props.post, "::PROPS");
 
-const Post =forwardRef(({ post }, ref)=> {
-  const [text, setText] = useState(post.text);
-  const [uuid,setUuid] = useState('');// CHANGEEEEEEEEEEEEE
-
+  const [text, setText] = useState(props.post.text);
+  const [uuid, setUuid] = useState(props.currentUserId); // CHANGEEEEEEEEEEEEE
 
   const classes = useStyles();
-  
-  const onDelete = () => {
-    // db.auth().onAuthStateChanged((u) => {
-      // if (u) {
-        // setUuid(u.uid);
-    // db.firestore().collection("posts").doc(u.uid).collection('userPosts').doc(post.id).delete();
-      // }
-    // })
-  };
 
+  const onDelete = () => {
+    db.auth().onAuthStateChanged((u) => {
+    if (u) {
+    setUuid(u.uid);
+    db.firestore().collection("posts").doc(u.uid).collection('userPosts').doc(props.post.id).delete();
+    }
+    })
+  };
 
   return (
     <div className="feed--post" ref={ref}>
-
-    <div className={classes.root}>
-      <div className="post--avatar">
-        <Avatar src={post.profile} className={classes.large} />
-        {/* <Avatar src={(post.profile === props.image)? (post.profile): (props.image)} className={classes.large} /> */}
+      <div className={classes.root}>
+        <div className="post--avatar">
+          {/* <Avatar src={props.post.profile} className={classes.large} /> */}
+          <Avatar
+            src={
+              props.post.profile === props.image
+                ? props.post.profile
+                : props.image
+            }
+            className={classes.large}
+          />
+        </div>
       </div>
-    </div>
-    {/* src={post.avatar} */}
+      {/* src={post.avatar} */}
       <div className="post--body">
-
         <div className="post--header">
-
           <div className="post--textHeader">
-
             <h3 className="user__Infowrapper">
               <span className="post--userName">
-              {post.fullname}
-                {"  "}
+                {props.post.fullname === props.fullname
+                  ? props.post.fullname
+                  : props.fullname}
+                {" "}
               </span>
               <span className="post-verified">
-                {/* {post.verified && ( */}
                 {"  "}
-                  <VerifiedUserRoundedIcon className="post--budge" />
-                {/* )} */}
+                <VerifiedUserRoundedIcon className="post--budge" />
                 <span>
-                  {"  "} {post.username}
+                  {"  @"}
+                  {props.post.username === props.username
+                    ? props.post.username
+                    : props.username}
                 </span>
               </span>
             </h3>
 
-                  {/* if the post was created by the user, show  edit and delete button */}
+            {/* if the post was created by the user, show  edit and delete button */}
             <div className="auxiliary__ButtonsWrapper">
               <span className="edit__PostWrapper">
                 {/* onClick={onUpdate} */}
-                {/* <EditButton postText={post.text} post={post} currentUserId={uuid} /> */}
+                <EditButton  post={props.post} currentUserId={uuid} />
               </span>
               <span className="delete__PostWrapper">
-                {/* <DeleteIcon onClick={onDelete} /> */}
+                <DeleteIcon onClick={onDelete} />
               </span>
             </div>
-            
           </div>
 
-          <span className="post__time">{post.time}</span>
+          <span className="post__time">{props.post.time}</span>
 
           <div className="post--description">
-            <p>{post.text}</p>
+            <p>{props.post.text}</p>
           </div>
         </div>
 
-        <img src={post.image} />
+        <img src={props.post.image} />
 
         <div className="post--footer">
           <FavoriteIcon fontSize="small" />
@@ -105,13 +108,16 @@ const Post =forwardRef(({ post }, ref)=> {
           <RepeatRoundedIcon />
         </div>
       </div>
-
     </div>
   );
 });
 
-const mapStateToProps = (state)=>({
-  image:state.profile.image
-})
+const mapStateToProps = (state) => ({
+  image: state.profile.image,
+  fullname: state.profile.fullname,
+  username: state.profile.username,
+  currentUserId: state.auth.currentUserId,
+
+});
 
 export default connect(mapStateToProps)(Post);

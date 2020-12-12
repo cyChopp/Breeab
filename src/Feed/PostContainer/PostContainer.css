@@ -16,22 +16,29 @@ label{
     border-bottom-left-radius: 20px;
 
 }
-.post--input{
+.post__input{
     display: flex;
     align-items: center;
-    padding:20px 0px 10px 20px;
+    padding:20px;
 
 
 }
-.post--input >textarea{
+.post__input >textarea{
     flex: 1;
+    display: flex;
+    flex-direction: row;
     margin: 0px 20px;
     border: 1px solid var(--breeab-color);
     border-radius: 18px;
     padding: 15px 20px 0 20px;
 
 }
-
+.profile{
+    flex:1;
+}
+.post__TextContainer{
+    flex:10;
+}
 
 input[type]{
     background-color: rgba(126, 126, 126, 0.083);

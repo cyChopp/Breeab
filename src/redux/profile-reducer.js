@@ -1,4 +1,4 @@
-import { userAPI } from "../api/restAPI";
+import { authAPI, userAPI } from "../api/restAPI";
 import { getUserInfoThunk } from "./authentication";
 
 const SET_USER_STATUS = "SET_USER_STATUS";
@@ -115,3 +115,16 @@ export const getUserThunk = (uid) => {
     dispatch(setIsProfileFetching(false));
   };
 };
+
+export const withSignOutThunk = ()=>{
+    return async(dispatch)=>{
+
+      await authAPI.signOut();
+
+      dispatch(setUserName(""));
+      dispatch(setFullName(""));
+      dispatch(setUserStatus(""));
+      dispatch(setUserLocation(""));
+      dispatch(setImage(""));
+    }
+}

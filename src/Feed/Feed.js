@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import db from "../firebase";
 import { compose } from "redux";
 import IsAuthHoc from "../hoc/IsAuthHoc";
+import SignIn from "../SignIn/SignIn";
 
 const Feed = (props) => {
   return (
@@ -28,6 +29,7 @@ const Feed = (props) => {
         <Route path="/profile" render={() => <ProfileContainer />} />
         <Route path="/messages" component={Messages} />
         <Route path="/list" component={List} />
+        <Route path="/signin" component={SignIn} />
         <Route
           path="/signup"
           render={() => (
@@ -49,6 +51,8 @@ const Feed = (props) => {
             />
           )}
         />
+       
+
       </Switch>
     </>
   );
