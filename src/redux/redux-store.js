@@ -6,13 +6,15 @@ import homeReducer from './home-reducer';
 import authentication from './authentication'
 import profileReducer from './profile-reducer';
 import postReducer from './post-reducer';
+import listReducer from './list-reducer';
 
 
 let reducers = combineReducers({
     home:homeReducer,
     auth:authentication,
     profile:profileReducer,
-    post:postReducer
+    post:postReducer,
+    list:listReducer
 
 });
 

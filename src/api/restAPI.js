@@ -1,10 +1,8 @@
 import db from "../firebase";
 import React from "react";
 
-
-//-------------- AUTHENTICATION API -------------- 
+//-------------- AUTHENTICATION API --------------
 export const authAPI = {
-
   signOut() {
     return db.auth().signOut();
   },
@@ -15,9 +13,9 @@ export const authAPI = {
       .createUserWithEmailAndPassword(data.email, data.password)
       .then((u) => {
         authAPI.setUserAuthInfo(u.user.email, u.user.uid);
-        if(u.user.uid){
-          console.log(u.user.uid,"check")
-        userAPI.setProfileInfo("","","","","",u.user.uid)
+        if (u.user.uid) {
+          console.log(u.user.uid, "check");
+          userAPI.setProfileInfo("", "", "", "", "", u.user.uid);
         }
       });
   },
@@ -28,7 +26,7 @@ export const authAPI = {
       .collection("users")
       .doc(uid)
       .collection("auth")
-      .doc('userAuthInfo')
+      .doc("userAuthInfo")
       .set({
         email: email,
         userId: uid,
@@ -42,80 +40,70 @@ export const authAPI = {
       .doc(uid)
       .collection("auth")
       .doc("userAuthInfo")
-      .get()
+      .get();
   },
 };
 
-
-
-
-//-------------- USER INFORMATION API -------------- 
+//-------------- USER INFORMATION API --------------
 
 export const userAPI = {
-
   getUserInfo(user) {
-    return db
-      .firestore()
-      .collection("users")
-      .doc(user)
-      .get()
-    },
-
-
-
-
-    //   .catch(error => { // .catch() error arising from inviteDocument.ref.get()
-    //     console.log(error,"error")
-    //     throw new Error('Error: Getting document:');
-    // })
-    // .then(res=>{if(res != error){console.log('good')}else{console.log('bad')}})
-    
-    // .then(doc => {
-    //     if (doc.exists) {
-    //         const id = doc.id;
-    //         var data = doc.data() as any;
-    //         return {id, ...data};
-    //     } else {
-    //         throw new error('No such document!'); // can now be caught only by getInviteById's caller
-    //     }
-    // });
-
-  setProfileInfo(fullname,username, status, location,image, uid) {
-    console.log('in Procces!')
-    return db.firestore().collection("users").doc(uid)
-    .set({
+    return db.firestore().collection("users").doc(user).get();
+  },
+  setProfileInfo(fullname, username, status, location, image, uid) {
+    console.log("in Procces!");
+    return db.firestore().collection("users").doc(uid).set({
       status: status,
       fullname: fullname,
-      username:username,
+      username: username,
       location: location,
-      image:image
-      
+      image: image,
     });
   },
-
 };
 
-
-//-------------- USER POST API -------------- 
+//-------------- USER POST API --------------
 
 export const postsAPI = {
-
-  addPost(fullname, username,time, postMessage,postImage,profile, uid) {
-    return db.firestore().collection("posts").doc(uid).collection("userPosts")
+  addPost(fullname, username, time, postMessage, postImage, profile, uid) {
+    return db
+      .firestore()
+      .collection("posts")
+      .doc(uid)
+      .collection("userPosts")
       .add({
         fullname: fullname,
-        username:username,
+        username: username,
         time: time,
         text: postMessage,
         image: postImage,
-        profile:profile
-      });
-  },
+        profile: profile,
+      })
+      .then(
+        listAPI.addPostsList(fullname,username,time,postMessage,postImage,profile,uid)
 
+      
+      )
+  }
+  
 };
-
-export const postGet = async()=>{
- const info =  await db.firestore().collection("posts").get()
- console.log(info[0])
+//-------------- POSTS LIST API --------------
+export const listAPI = {
+  addPostsList(fullname,username,time,postMessage,postImage,profile,uid){
+    console.log(fullname,username, time, postMessage, postImage,profile, uid,"::::::::")
+    return  db
+        .firestore()
+        .collection("postsList")
+        .add(
+          {
+            fullname: fullname,
+            username: username,
+            time: time,
+            text: postMessage,
+            image: postImage,
+            profile: profile,
+            uid:uid
+          }
+        )
+    }
 }
-

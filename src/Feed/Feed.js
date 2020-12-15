@@ -27,7 +27,7 @@ const Feed = (props) => {
       <Switch>
         <Route exact path="/" render={() => <HomeContainer />} />
         <Route path="/profile" render={() => <ProfileContainer />} />
-        <Route path="/messages" component={Messages} />
+        <Route path="/messages" render={() => <Messages photoURL={props.photoURL}/>}/>
         <Route path="/list" component={List} />
         <Route path="/signin" component={SignIn} />
         <Route
@@ -59,6 +59,8 @@ const Feed = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  photoURL: state.profile.image,
+
   fullname: state.profile.fullname,
   username: state.profile.username,
   location: state.profile.location,

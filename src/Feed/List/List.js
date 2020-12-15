@@ -1,40 +1,38 @@
-import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import FeedWrapper from "../FeedWrapper";
 import StickyTop from "../../StinckyTop/StickyTop";
 import { compose } from "redux";
 import { PrivateRouteHoc } from "../../hoc/PrivateRouteHoc";
-import db from "../../firebase";
-import { postGet } from "../../api/restAPI";
+import { setPostsListThunk } from "../../redux/list-reducer";
+import { connect } from "react-redux";
+import ListInfoHoc from "../../hoc/ListInfoHoc";
+import ListPost from "./ListPost";
 
-const List = () => {
-
-  const [posts, setPosts] = useState([]);
-
-  // db.firestore()
-  //       .collection("posts")
-  //       .doc()
-  //       .onSnapshot((snapshot) => {
-  //         setPosts(snapshot.docs.map((doc)=>({...doc.data()})))
-  //       });
-
+const List = (props) => {
+  const [postsList, setPostsList] = useState(props.postsList);
 
   useEffect(() => {
+    setPostsList(props.postsList);
+  }, [props.postsList]);
 
-    postGet()
-    
-  }, []);
+  return (
+    <>
+      <FeedWrapper>
+        <StickyTop header={"List"} />
 
-
-  return( 
-    <div>
-    <FeedWrapper>
-    <StickyTop header={"List"}/>
-  </FeedWrapper>
-  {posts[0]}{"posts"}
-
-  </div>
-  )
+        {postsList.map((post) => (
+          <ListPost key={post.id} post={post} />
+        ))}
+      </FeedWrapper>
+    </>
+  );
 };
-
-export default compose(PrivateRouteHoc)(List);
+const mapStateToProps = (state) => ({
+  currentUserId: state.auth.currentUserId,
+  postsList: state.list.postsList,
+});
+export default compose(
+  ListInfoHoc,
+  PrivateRouteHoc,
+  connect(mapStateToProps, { setPostsListThunk })
+)(List);

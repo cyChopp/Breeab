@@ -16,15 +16,14 @@ const HomeContainer = (props) => {
   const [postText, setPostText] = useState("");
 
   useEffect(() => {
-      db.firestore()
-        .collection("posts")
-        .doc(props.currentUserId)
-        .collection("userPosts")
-        .orderBy("time", "desc")
-        .onSnapshot((snapshot) => {
-          setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-         
-        });
+    db.firestore()
+      .collection("posts")
+      .doc(props.currentUserId)
+      .collection("userPosts")
+      .orderBy("time", "desc")
+      .onSnapshot((snapshot) => {
+        setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      });
   }, []);
 
   return (
@@ -37,13 +36,7 @@ const HomeContainer = (props) => {
 
           {posts.map((post) => (
             <Post
-              fullname={post.fullname}
-              currentUserId={props.currentUserId}
-              userName={post.username}
-              time={post.time}
-              text={post.text}
               post={post}
-              image={post.image}
             />
           ))}
         </FeedWrapper>

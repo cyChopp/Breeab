@@ -1,4 +1,4 @@
-import { postsAPI } from "../api/restAPI";
+import {  postsAPI } from "../api/restAPI";
 
 const SET_POST_TEXT = "SET_POST_TEXT";
 
@@ -31,6 +31,9 @@ export const setPostThunk = (fullname,username, time, postMessage, postImage,pro
 
     
     await postsAPI.addPost(fullname,username ,time,postMessage,postImage,profile, uid);
+   
 
   };
 };
+
+

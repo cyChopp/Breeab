@@ -18,7 +18,6 @@ const PostInfoHoc = (Component) => {
             props.getUserThunk(props.currentUserId)
             
         }, [])
-        // props.isInfoLoaded
 
         return (
             <>
