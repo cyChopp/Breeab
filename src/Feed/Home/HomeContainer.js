@@ -36,6 +36,7 @@ const HomeContainer = (props) => {
 
           {posts.map((post) => (
             <Post
+              key={post.id}
               post={post}
             />
           ))}

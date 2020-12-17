@@ -13,6 +13,7 @@ import EditButton from "../../../DeleteButton/EditButton";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
+
   root: {
     display: "flex",
     "& > *": {
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Post = forwardRef((props, ref) => {
+  
   console.log(props.post, "::PROPS");
 
   const [text, setText] = useState(props.post.text);

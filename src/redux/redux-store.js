@@ -7,6 +7,7 @@ import authentication from './authentication'
 import profileReducer from './profile-reducer';
 import postReducer from './post-reducer';
 import listReducer from './list-reducer';
+import chatReducer from './chat-reducer';
 
 
 let reducers = combineReducers({
@@ -14,7 +15,8 @@ let reducers = combineReducers({
     auth:authentication,
     profile:profileReducer,
     post:postReducer,
-    list:listReducer
+    list:listReducer,
+    chat:chatReducer
 
 });
 

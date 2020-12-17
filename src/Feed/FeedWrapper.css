@@ -1,6 +1,6 @@
 .feed{
     flex: 0.7;
-    min-width: fit-content; /*it must to feet the content as the minimum width */
+    min-width: fit-content; 
     overflow-y: scroll;
     -ms-overflow-style:none;
     scrollbar-width:none ;
