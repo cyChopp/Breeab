@@ -1,3 +1,4 @@
+import React from 'react';
 import db from "../firebase";
 
 const SET_CURRENT_USER_PICTURE = "SET_CURRENT_USER_PICTURE";
@@ -5,10 +6,9 @@ const SET_CURRENT_USER_PICTURE = "SET_CURRENT_USER_PICTURE";
 const initialState = {
 
     currentUserPicture:""
-
 }
 
-const chatReducer =(state=initialState,action)=>{
+const chatReducer = (state=initialState,action)=>{
     switch(action.type){
 
         case SET_CURRENT_USER_PICTURE:

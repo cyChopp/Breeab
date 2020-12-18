@@ -8,18 +8,44 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
 import AssignmentIndRoundedIcon from "@material-ui/icons/AssignmentIndRounded";
 
-import { Button, Typography } from "@material-ui/core";
+import { Avatar, Button, Icon, makeStyles, Typography } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
+const useClasses = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+  size: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+  },
+}));
+
+
+
+
 const Sidebar = (props) => {
+
+  const styles = useClasses();
+
   return (
     <div className="sidebar">
       {/* <h2 className="sidebar--logo">Breeab</h2> */}
       <Typography component="h1" className="sidebar--logo">
         Breeab
       </Typography>
-
+    {props.isAuth && 
+      <NavLink to="/profile" >
+        <div className="sidebar__profile">
+        <Avatar src={props.image} className="sidebar__profileImage" />
+        {props.username}
+        </div>
+      </NavLink>
+    }
       <NavLink to="/">
         <SidebarOption active Icon={HomeRoundedIcon} text="Home" />
       </NavLink>
@@ -60,6 +86,8 @@ const Sidebar = (props) => {
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  image:state.profile.image,
+  username:state.profile.username
 });
 
 export default connect(mapStateToProps)(Sidebar);

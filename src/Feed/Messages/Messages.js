@@ -12,6 +12,7 @@ import Message from "./Message/Message";
 
 import db from "../../firebase";
 import firebase from "firebase";
+import ProfileInfoHoc from "../../hoc/ProfileInfoHoc";
 
 
 const TextFieldCustomized = withStyles({
@@ -35,7 +36,10 @@ const useStyles = makeStyles({
   textfield: {
     height: 2
   },
+  
 });
+
+
 
 const Messages = (props) => {
   const [input, setInput] = useState("");
@@ -53,7 +57,7 @@ const Messages = (props) => {
       .orderBy("timestamp", "asc")
       .onSnapshot((snapshot) => {
         setMessages(
-          snapshot.docs.map((doc) => ({ id: doc.id, message: doc.data() }))
+          snapshot.docs.map((doc) => ({ id: doc.id, message: doc.data() ,image:doc.data().image}))
         );
       });
   }, []);
@@ -64,6 +68,7 @@ const Messages = (props) => {
     db.firestore().collection("messages").add({
       message: input,
       name: fullname,
+      image:props.image,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
 
@@ -78,11 +83,12 @@ const Messages = (props) => {
       <StickyTop header={"Message"} />
       <div className="messages__chat">
         {/* <div > */}
-        {messages.map(({ id, message }) => (
+        {messages.map(({ id, message,image }) => (
           <Message
             key={id}
             message={message}
             fullname={fullname}
+            image={image}
             dummy={dummy}
           />
         ))}
@@ -119,4 +125,4 @@ const Messages = (props) => {
   );
 };
 
-export default compose(PrivateRouteHoc)(Messages);
+export default compose(PrivateRouteHoc,ProfileInfoHoc)(Messages);

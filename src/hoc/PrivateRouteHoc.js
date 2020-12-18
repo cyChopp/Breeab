@@ -7,7 +7,6 @@ const mapStateToProps = (state) => ({
 });
 
 export const PrivateRouteHoc = (Component) => {
-
   const NewComponent = (props) => {
     return (
       <>{props.isAuth ? <Component {...props} /> : <Redirect to="/signup" />}</>

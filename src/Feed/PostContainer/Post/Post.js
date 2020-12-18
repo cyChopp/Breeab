@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Post = forwardRef((props, ref) => {
   
-  console.log(props.post, "::PROPS");
 
   const [text, setText] = useState(props.post.text);
   const [uuid, setUuid] = useState(props.currentUserId); // CHANGEEEEEEEEEEEEE
@@ -62,6 +61,7 @@ const Post = forwardRef((props, ref) => {
       </div>
       {/* src={post.avatar} */}
       <div className="post--body">
+
         <div className="post--header">
           <div className="post--textHeader">
             <h3 className="user__Infowrapper">
@@ -102,12 +102,12 @@ const Post = forwardRef((props, ref) => {
           </div>
         </div>
 
-        <img src={props.post.image} />
+        <img src={props.post.image} className="post__image"/>
 
         <div className="post--footer">
-          <FavoriteIcon fontSize="small" />
-          <TextsmsRoundedIcon />
-          <RepeatRoundedIcon />
+          <FavoriteIcon fontSize="small" id="likeButton" />
+          <TextsmsRoundedIcon id="comentButton"/>
+          <RepeatRoundedIcon id="shareButton"/>
         </div>
       </div>
     </div>

@@ -21,7 +21,8 @@ const IsAuthHoc = (Component) => {
       db.auth().onAuthStateChanged((u) => {
         if (u) {
           props.getUserInfoThunk(u.uid);
-          props.setIsProfileFetching(true);// every refresh set the 
+          props.setIsProfileFetching(true);
+          // history.push('/profile')// every refresh set the 
         }else{
           history.push('/signup')
         }

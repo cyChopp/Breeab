@@ -16,8 +16,7 @@ let reducers = combineReducers({
     profile:profileReducer,
     post:postReducer,
     list:listReducer,
-    chat:chatReducer
-
+    chat:chatReducer,
 });
 
 const store = createStore(reducers,composeWithDevTools(applyMiddleware(thunk)));

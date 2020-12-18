@@ -2,15 +2,19 @@
     border-radius: 40px !important;
     margin:10px ;
     width:fit-content;
+    max-width: 80%;
 
 }
 .message__currentUser{
     border-radius: 40px !important;
     margin:10px ;
     width:fit-content;
+    max-width: 80%;
+
     margin-left: auto;
     text-align: right !important;
 }
+
 .message__backgroudColorCurrent{
     background-color: #f50057 !important;
 }
@@ -21,4 +25,15 @@
 .message__textColor{
     color:white !important;
     padding: 5px 5px 0px 5px;
+}
+.message__wrapperCurrentUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.message__wrapper{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }

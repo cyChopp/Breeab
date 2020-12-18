@@ -172,7 +172,6 @@ const SignUp = (props) => {
           </ThemeProvider>
         </div>
       </div>
-      <Button onClick={logOut}>Log out</Button>
     </FeedWrapper>
   );
 };

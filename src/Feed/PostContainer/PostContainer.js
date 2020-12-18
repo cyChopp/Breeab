@@ -33,6 +33,7 @@ function PostContainer(props) {
   const [postImage, setPostImage] = useState("");
   const [profileImage, setProfileImage] = useState(props.image);
   const [isFetching, setIsFetching] = useState(false);
+  const [posting ,setPosting] = useState(false)
 
   const { register, handleSubmit ,reset} = useForm();
 
@@ -68,10 +69,22 @@ function PostContainer(props) {
   const addPost = (data, e) => {
     e.preventDefault();
 
-    setPostText(data.postText);
-    setPostImage(postImage);
+    if(postImage === ""){
+      console.log("image null")
+    }
+    
+    if(data.postText === ""){
+      console.log("post null")
+    }
 
-    if (data.postImage != "" || data.postText != "") {
+
+    if (postImage === "" && data.postText === "") {
+       alert("Your post should contain text or image!");
+
+      
+    } else {
+      setPostText(data.postText);
+      setPostImage(postImage);
       // e.preventDefault();
       console.log(data, "post data");
       console.log(
@@ -100,8 +113,8 @@ function PostContainer(props) {
         props.currentUserId
       );
         e.target.reset()
-    } else {
-      alert("Your post should contain text or image!");
+        setPostImage("")
+
     }
   };
 
@@ -130,6 +143,7 @@ function PostContainer(props) {
             </div>
           </div>
 
+
           <div className="input-buttons">
             {isFetching && (
               <div className="preloader__Wrapper">
@@ -144,15 +158,17 @@ function PostContainer(props) {
                   Upload file
                 </label>
               </span>
-              <input id="file-upload" type="file" onChange={imageInput} />
+              <input id="file-upload" type="file" onChange={imageInput} disabled={isFetching && true} />
             </div>
 
             <div className="post--buttonWrapper">
-              <Button type="submit" className="post--button">
+              <Button type="submit" className="post--button" disabled={isFetching && true}>
                 Post
               </Button>
             </div>
           </div>
+
+
         </form>
       </ThemeProvider>
     </div>
