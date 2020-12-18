@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { useHistory } from "react-router-dom";
 import db from "../firebase";
 import {  getUserInfoThunk } from "../redux/authentication";
-import {setIsProfileFetching} from "../redux/profile-reducer"
+import {setIsProfileFetching,getUserThunk} from "../redux/profile-reducer"
+
 
 
 
@@ -20,9 +21,10 @@ const IsAuthHoc = (Component) => {
     useEffect(() => {
       db.auth().onAuthStateChanged((u) => {
         if (u) {
-          props.getUserInfoThunk(u.uid);
+          props.getUserInfoThunk(u.uid);//auth
+          props.getUserThunk(u.uid)//profile info
           props.setIsProfileFetching(true);
-          // history.push('/profile')// every refresh set the 
+          return  history.replace('/profile')// every refresh set the 
         }else{
           history.push('/signup')
         }
@@ -32,7 +34,7 @@ const IsAuthHoc = (Component) => {
     return <Component {...props} />;
   };
 
-  return connect(null, { getUserInfoThunk,setIsProfileFetching })(NewComponent);
+  return connect(null, { getUserInfoThunk,setIsProfileFetching ,getUserThunk})(NewComponent);
   // return connect(null,{setIsAuth})(NewComponent)
 };
 

@@ -26,12 +26,12 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { connect } from "react-redux";
-import { signOutThunk} from "../../redux/authentication";
+import { signOutThunk } from "../../redux/authentication";
 import {
   setUserName,
   setFullName,
   setUserInfoThunk,
-  withSignOutThunk
+  withSignOutThunk,
 } from "../../redux/profile-reducer";
 import { setIsFetching } from "../../redux/home-reducer";
 
@@ -63,6 +63,8 @@ const ProfileContainer = (props) => {
   const [username, setUsername] = useState(props.username);
 
   const [isFetching, setIsFetching] = useState(false);
+  const [editProfile, setEditProfile] = useState(true);
+  
 
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -101,6 +103,8 @@ const ProfileContainer = (props) => {
   };
 
   const handleEditProfile = () => {
+    setEditProfile(true)
+
     const fileInput = document.getElementById("imageInput");
     fileInput.click();
   };
@@ -112,15 +116,18 @@ const ProfileContainer = (props) => {
     // props.setFullName("");
     // props.setUserName("");
     // props.setUserEmail("");
-// props.signOutThunk()
-    props.withSignOutThunk() 
+    // props.signOutThunk()
+    props.withSignOutThunk();
 
     history.push("/signup");
   };
 
   //--------- SAVE INFO ---------
   const onSubmit = (data) => {
-    console.log(postImage,"IMAGE:::::")
+
+    setEditProfile(true);
+
+    console.log(postImage, "IMAGE:::::");
     props.setUserInfoThunk(
       data.fullname,
       data.username,
@@ -133,6 +140,8 @@ const ProfileContainer = (props) => {
   };
 
   const handleEdit = () => {
+    setEditProfile(false)
+
     setIsDisabled(!isDisabled);
   };
 
@@ -142,131 +151,138 @@ const ProfileContainer = (props) => {
     setStatus(props.status);
     setLocation(props.location);
     setUsername(props.username);
-    setPostImage(props.image)
-
+    setPostImage(props.image);
   }, [
     props.fullname,
     props.status,
     props.location,
     props.date,
     props.username,
-    props.image
+    props.image,
   ]);
 
-  const { register, handleSubmit, errors, control } = useForm();
+  const { register, handleSubmit} = useForm();
 
   const classes = useStyles();
 
   return (
-   
     <FeedWrapper>
       <StickyTop header={"Profile"} />
-      <Tooltip title="Logout" placement="top">
-        <IconButton onClick={handleLogOut}>
+      <Tooltip title="Logout"  className="profileContainer__logout">
+        <IconButton onClick={handleLogOut} style={{ backgroundColor: 'transparent' }}>
           <KeyboardReturn color="secondary" />
           <span>Log out</span>
         </IconButton>
       </Tooltip>
-    <div className={!isDisabled ? "profile__Enabled" : "profile__Disabled"}>
-      <div className="profile__UploadWrapper">
-      <div className="profile__Wrapper">
-        <div className="profile__Picture">
-          <div className={classes.root}>
-            <Avatar src={postImage} className={classes.large} />
-          </div>
-        </div>
-
-        <div className="upload__ProfileButtons">
-          <div >
-            <input
-              id="imageInput"
-              type="file"
-              hidden="hidden"
-              onChange={imageInput}
-            />
-            <IconButton onClick={handleEditProfile} disabled={isDisabled}>
-              <EditIcon color="secondary" />
-            </IconButton>
-          </div>
-          <div >
-          {isFetching && (
-            <div >
-              <CircularProgress color="secondary" size={20} />
+      <div className={!isDisabled ? "profile__Enabled" : "profile__Disabled"}>
+        <div className="profile__UploadWrapper">
+          <div className="profile__Wrapper">
+            <div className="profile__Picture">
+              <div className={classes.root}>
+                <Avatar src={postImage} className={classes.large} />
+              </div>
             </div>
+
+            <div className="upload__ProfileButtons">
+              <div>
+                <input
+                  id="imageInput"
+                  type="file"
+                  hidden="hidden"
+                  onChange={imageInput}
+                />
+                <IconButton onClick={handleEditProfile} disabled={isDisabled}>
+                  <EditIcon color="secondary" />
+                </IconButton>
+              </div>
+              <div>
+                {isFetching && (
+                  <div>
+                    <CircularProgress color="secondary" size={20} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ThemeProvider theme={theme}>
+          {true ? (
+            <div className="container">
+              <Container className="form__Wrapper" maxWidth="xs">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="dialog__Input"
+                >
+                  <TextField
+                    inputRef={register}
+                    defaultValue={username}
+                    required
+                    autoFocus
+                    fullWidth
+                    disabled={isDisabled}
+                    variant="outlined"
+                    margin="normal"
+                    id="username"
+                    label="Username"
+                    name="username"
+                  />
+                  <TextField
+                    inputRef={register}
+                    defaultValue={fullname}
+                    required
+                    fullWidth
+                    disabled={isDisabled}
+                    variant="outlined"
+                    margin="normal"
+                    id="fullname"
+                    label="Full name"
+                    name="fullname"
+                  />
+                  <TextField
+                    inputRef={register}
+                    defaultValue={status}
+                    autoFocus
+                    fullWidth
+                    disabled={isDisabled}
+                    variant="outlined"
+                    margin="normal"
+                    id="status"
+                    label="Status"
+                    name="status"
+                  />
+                  <TextField
+                    inputRef={register}
+                    defaultValue={location}
+                    fullWidth
+                    disabled={isDisabled}
+                    variant="outlined"
+                    margin="normal"
+                    name="location"
+                    label="Location"
+                    id="location"
+                  />
+                  <div className="profileContainer__buttons">
+                  <Button variant="outlined" color="primary" type="submit" variant={!editProfile ? "contained" : "outlined"}>
+                    Save
+                  </Button>
+                  <Button
+                    variant={editProfile ? "contained" : "outlined"}
+                    id="profile__editButton"
+                    onClick={handleEdit}
+                    color="primary"
+                  >
+                    Edit
+                  </Button>
+                  </div>
+                </form>
+              </Container>
+            </div>
+          ) : (
+            <CircularProgress color="secondary" size={20} />
           )}
-          </div>
-        </div>
-        </div>
+        </ThemeProvider>
       </div>
-
-      <ThemeProvider theme={theme}>
-        {true ? (
-          <div className="container">
-            <Container className="form__Wrapper" maxWidth="xs">
-              <form onSubmit={handleSubmit(onSubmit)} className="dialog__Input">
-                <TextField
-                  inputRef={register}
-                  defaultValue={username}
-                  required
-                  autoFocus
-                  fullWidth
-                  disabled={isDisabled}
-                  variant="outlined"
-                  margin="normal"
-                  id="username"
-                  label="Username"
-                  name="username"
-                />
-                <TextField
-                  inputRef={register}
-                  defaultValue={fullname}
-                  required
-                  fullWidth
-                  disabled={isDisabled}
-                  variant="outlined"
-                  margin="normal"
-                  id="fullname"
-                  label="Full name"
-                  name="fullname"
-                />
-                <TextField
-                  inputRef={register}
-                  defaultValue={status}
-                  autoFocus
-                  fullWidth
-                  disabled={isDisabled}
-                  variant="outlined"
-                  margin="normal"
-                  id="status"
-                  label="Status"
-                  name="status"
-                />
-                <TextField
-                  inputRef={register}
-                  defaultValue={location}
-                  fullWidth
-                  disabled={isDisabled}
-                  variant="outlined"
-                  margin="normal"
-                  name="location"
-                  label="Location"
-                  id="location"
-                />
-                <Button variant="outlined" color="primary" type="submit">
-                  Save
-                </Button>
-                <Button onClick={handleEdit} variant="outlined" color="primary">
-                  Edit
-                </Button>
-              </form>
-            </Container>
-          </div>
-        ) : (
-          <CircularProgress color="secondary" size={20} />
-        )}
-      </ThemeProvider>
-      </div>
-
     </FeedWrapper>
   );
 };
@@ -277,7 +293,7 @@ const mapStateToProps = (state) => ({
   fullname: state.profile.fullname,
   location: state.profile.location,
   date: state.profile.date,
-  image:state.profile.image,
+  image: state.profile.image,
   currentUserId: state.auth.currentUserId,
 });
 

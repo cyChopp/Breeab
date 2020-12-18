@@ -6,7 +6,7 @@ a{
     flex: 0.2; /* use 20% of the screen */
     min-width: 230px;
     padding-top: 10px;
-    background-color:rgb(38, 36, 36);
+    background-color:rgb(34, 34, 34);
 }
 
 .sidebar--logo{

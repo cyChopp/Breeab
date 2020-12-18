@@ -60,6 +60,7 @@ const Messages = (props) => {
           snapshot.docs.map((doc) => ({ id: doc.id, message: doc.data() ,image:doc.data().image}))
         );
       });
+
   }, []);
 
   const sendMessage = (e) => {

@@ -155,15 +155,13 @@ const SignUp = (props) => {
               >
                 Sign Up
               </Button>
-              <Grid container>
+              <Grid container className="signUp__helpLinks">
                 <Grid item xs>
-                  {/* <Link href="#" variant="body2"> */}
                   Forgot password?
-                  {/* </Link> */}
                 </Grid>
                 <Grid item>
                   <NavLink to="/signin">
-                    Already have an account? Sign in
+                    Already have an account?<span className="signup__signInLink">  Sign in</span>
                   </NavLink>
 
                 </Grid>
@@ -175,5 +173,5 @@ const SignUp = (props) => {
     </FeedWrapper>
   );
 };
-
+  
 export default SignUp;

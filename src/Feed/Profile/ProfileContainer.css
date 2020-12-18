@@ -23,6 +23,11 @@
   font-weight: 600;
   padding-bottom: 5px;
 }
+.profileContainer__logout{
+  padding:50px 50px 0px 0px !important;
+  color:  white !important;
+  float: right !important;
+}
 
 .custom__FileUpload {
   background-color: rgba(
@@ -51,12 +56,12 @@
 
 .profile__Enabled{
   padding-top: 50px !important;
-  margin:50px 20px 20px 20px ;
+  margin:90px 20px 20px 20px ;
   background-color: rgb(34, 34, 34);
   border-radius: 20px;
 }
 .profile__Disabled{
-  padding-top: 100px !important;
+  padding-top: 140px !important;
 }
 
 .file__uploadWrapper {
@@ -100,4 +105,13 @@ form> button{
   flex: 1;
   display: flex;
   align-items: flex-end;
+}
+
+.profileContainer__buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+#profile__editButton{
+  margin-left: 20px;
 }

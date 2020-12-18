@@ -40,7 +40,7 @@ function PostContainer(props) {
   const history = useHistory();
 
   const [time, setTime] = useState(
-    moment(Date().toLocaleString()).format("Do hh:mm:ss YYYY")
+    moment(Date().toLocaleString()).format("Do hh:mm:ss a YYYY")
   );
 
   // ------------ ADD IMAGE ---------------

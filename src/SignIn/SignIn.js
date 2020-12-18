@@ -132,15 +132,15 @@ const SignIn = (props) => {
               >
                 Sign In
               </Button>
-              <Grid container>
+              <Grid container className="signUp__helpLinks">
                 <Grid item xs>
                   {/* <Link href="#" variant="body2"> */}
                   Forgot password?
                   {/* </Link> */}
                 </Grid>
-                <Grid item>
+                <Grid item >
                   <NavLink to="/signup">
-                    Don't have an account? Sign Up
+                    Don't have an account? <span className="signup__signInLink">  Sign Up</span>
                   </NavLink>
 
                 </Grid>
