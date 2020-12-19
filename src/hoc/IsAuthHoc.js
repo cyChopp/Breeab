@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import db from "../firebase";
 import {  getUserInfoThunk } from "../redux/authentication";
 import {setIsProfileFetching,getUserThunk} from "../redux/profile-reducer"
@@ -14,7 +14,7 @@ const IsAuthHoc = (Component) => {
     
   const NewComponent = (props) => {
 
-
+    const [auth , setAuth] = useState(false);
     const history  = useHistory();
 
 
@@ -24,18 +24,22 @@ const IsAuthHoc = (Component) => {
           props.getUserInfoThunk(u.uid);//auth
           props.getUserThunk(u.uid)//profile info
           props.setIsProfileFetching(true);
-          return  history.replace('/profile')// every refresh set the 
+          setAuth(true)
+          // history.replace('/profile')// every refresh set the 
         }else{
-          history.push('/signup')
+          setAuth(false)
         }
+      
       });
     }, []);
 
-    return <Component {...props} />;
+  
+   return <Component {...props} pageRedirect={auth} />  
+
   };
 
+
   return connect(null, { getUserInfoThunk,setIsProfileFetching ,getUserThunk})(NewComponent);
-  // return connect(null,{setIsAuth})(NewComponent)
 };
 
 export default IsAuthHoc;

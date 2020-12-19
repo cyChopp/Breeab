@@ -17,7 +17,6 @@ import { setIsFetching } from "../../redux/home-reducer";
 import "./PostContainer.css";
 import PostInfoHoc from "../../hoc/PostInfoHoc";
 import { compose } from "redux";
-import { useHistory } from "react-router-dom";
 import ProfileInfoHoc from "../../hoc/ProfileInfoHoc";
 
 const theme = createMuiTheme({
@@ -31,17 +30,14 @@ const theme = createMuiTheme({
 
 function PostContainer(props) {
   const [postImage, setPostImage] = useState("");
-  const [profileImage, setProfileImage] = useState(props.image);
+  // const [profileImage, setProfileImage] = useState(props.image);
   const [isFetching, setIsFetching] = useState(false);
-  const [posting ,setPosting] = useState(false)
 
-  const { register, handleSubmit ,reset} = useForm();
+  const [time, setTime] = useState( moment(Date().toLocaleString()).format("Do hh:mm:ss a YYYY"));
 
-  const history = useHistory();
 
-  const [time, setTime] = useState(
-    moment(Date().toLocaleString()).format("Do hh:mm:ss a YYYY")
-  );
+  const { register, handleSubmit } = useForm();
+
 
   // ------------ ADD IMAGE ---------------
 
@@ -69,19 +65,8 @@ function PostContainer(props) {
   const addPost = (data, e) => {
     e.preventDefault();
 
-    if(postImage === ""){
-      console.log("image null")
-    }
-    
-    if(data.postText === ""){
-      console.log("post null")
-    }
-
-
     if (postImage === "" && data.postText === "") {
-       alert("Your post should contain text or image!");
-
-      
+      alert("Your post should contain text or image!");
     } else {
       setPostText(data.postText);
       setPostImage(postImage);
@@ -109,12 +94,11 @@ function PostContainer(props) {
         time,
         data.postText,
         postImage,
-        profileImage,
+        props.image,
         props.currentUserId
       );
-        e.target.reset()
-        setPostImage("")
-
+      e.target.reset();
+      setPostImage("");
     }
   };
 
@@ -127,7 +111,7 @@ function PostContainer(props) {
         <form onSubmit={handleSubmit(addPost)}>
           <div className="post__input">
             <div className="profile">
-              <Avatar src={profileImage} />
+              <Avatar src={props.image} />
             </div>
             <div className="post__TextContainer">
               <TextField
@@ -139,10 +123,10 @@ function PostContainer(props) {
                 id="postText"
                 label="Post"
                 name="postText"
+                autoFocus
               />
             </div>
           </div>
-
 
           <div className="input-buttons">
             {isFetching && (
@@ -158,17 +142,24 @@ function PostContainer(props) {
                   Upload file
                 </label>
               </span>
-              <input id="file-upload" type="file" onChange={imageInput} disabled={isFetching && true} />
+              <input
+                id="file-upload"
+                type="file"
+                onChange={imageInput}
+                disabled={isFetching && true}
+              />
             </div>
 
             <div className="post--buttonWrapper">
-              <Button type="submit" className="post--button" disabled={isFetching && true}>
+              <Button
+                type="submit"
+                className="post--button"
+                disabled={isFetching && true}
+              >
                 Post
               </Button>
             </div>
           </div>
-
-
         </form>
       </ThemeProvider>
     </div>

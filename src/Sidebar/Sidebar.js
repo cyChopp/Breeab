@@ -8,7 +8,13 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
 import AssignmentIndRoundedIcon from "@material-ui/icons/AssignmentIndRounded";
 
-import { Avatar, Button, Icon, makeStyles, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  Icon,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -25,11 +31,7 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
-
-
-
 const Sidebar = (props) => {
-
   const styles = useClasses();
 
   return (
@@ -38,32 +40,28 @@ const Sidebar = (props) => {
       <Typography component="h1" className="sidebar--logo">
         Breeab
       </Typography>
-    {props.isAuth && 
-      <NavLink to="/profile" >
-        <div className="sidebar__profile">
-        <Avatar src={props.image} className="sidebar__profileImage" />
-        {props.username}
-        </div>
-      </NavLink>
-    }
-      <NavLink to="/">
-        <SidebarOption active Icon={HomeRoundedIcon} text="Home" />
+      {props.isAuth && (
+        <NavLink to="/profile">
+          <div className="sidebar__profile">
+            <Avatar src={props.image} className="sidebar__profileImage" />
+            {props.username}
+          </div>
+        </NavLink>
+      )}
+      <NavLink activeStyle ={{color:'#c2164f'}}  to="/home">
+        <SidebarOption  Icon={HomeRoundedIcon} text="Home" />
       </NavLink>
 
-      <NavLink to="/profile">
+      <NavLink  activeStyle ={{color:'#c2164f'}} to="/profile">
         {" "}
         <SidebarOption Icon={AccountCircleIcon} text="Profile" />
       </NavLink>
 
-      <NavLink to="/messages">
+      <NavLink  activeStyle ={{color:'#c2164f'}} to="/messages">
         <SidebarOption Icon={MessageRoundedIcon} text="Messages" />
       </NavLink>
 
-      <NavLink to="/notifications">
-        <SidebarOption Icon={NotificationsRoundedIcon} text="Notifications" />
-      </NavLink>
-
-      <NavLink to="/list">
+      <NavLink  activeStyle ={{color:'#c2164f'}} to="/list">
         <SidebarOption Icon={ListRoundedIcon} text="List" />
       </NavLink>
 
@@ -72,22 +70,31 @@ const Sidebar = (props) => {
           <SidebarOption Icon={AssignmentIndRoundedIcon} text="Sign out" />
         </NavLink>
       ) : (
-        <NavLink to="/signup">
+        <NavLink  to="/signup">
           <SidebarOption Icon={AssignmentIndRoundedIcon} text="SignUp" />
         </NavLink>
       )}
+      
+      {props.isAuth ? (
+        <NavLink to="/">
+          <Button variant="outlined" className="sidebar--post" fullWidth>
+            Post
+          </Button>
+        </NavLink>
+      ) : (
+        <Button variant="outlined" className="sidebar--post" fullWidth>
+          Post
+        </Button>
+      )}
 
-      <Button variant="outlined" className="sidebar--post" fullWidth>
-        Post
-      </Button>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
-  image:state.profile.image,
-  username:state.profile.username
+  image: state.profile.image,
+  username: state.profile.username,
 });
 
 export default connect(mapStateToProps)(Sidebar);

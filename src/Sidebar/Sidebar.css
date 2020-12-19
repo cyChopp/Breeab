@@ -19,7 +19,7 @@ a{
     margin-left: 20px !important;
 }
 .sidebar--post{
-    background-color: var(--breeab-color) !important; /* !important overrides the Mui theme*/
+    background-color: var(--breeab-color) !important; 
     border-radius:0 !important;
     border: none !important;
     color:#E2E2E2 !important;

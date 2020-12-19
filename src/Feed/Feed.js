@@ -25,7 +25,7 @@ const Feed = (props) => {
   return (
     <>
       <Switch>
-        <Route exact path="/" render={() => <HomeContainer />} />
+        <Route exact path="/home" render={() => <HomeContainer />} />
         <Route path="/profile" render={() => <ProfileContainer />} />
         <Route path="/messages" render={() => <Messages fullname={props.fullname}image={props.image}/>}/>
         <Route path="/list" component={List} />

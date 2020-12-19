@@ -15,6 +15,9 @@ const HomeContainer = (props) => {
   const [posts, setPosts] = useState([]);
   const [postText, setPostText] = useState("");
 
+
+
+
   useEffect(() => {
     db.firestore()
       .collection("posts")

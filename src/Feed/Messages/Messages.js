@@ -13,6 +13,7 @@ import Message from "./Message/Message";
 import db from "../../firebase";
 import firebase from "firebase";
 import ProfileInfoHoc from "../../hoc/ProfileInfoHoc";
+import { useForm } from "react-hook-form";
 
 
 const TextFieldCustomized = withStyles({
@@ -42,9 +43,9 @@ const useStyles = makeStyles({
 
 
 const Messages = (props) => {
-  const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
-  const [fullname, setFullName] = useState(props.fullname);
+
+  const {register,handleSubmit} = useForm();
 
   const classes = useStyles();
 
@@ -63,20 +64,16 @@ const Messages = (props) => {
 
   }, []);
 
-  const sendMessage = (e) => {
+  const sendMessage = (data,e) => {
     e.preventDefault();
 
     db.firestore().collection("messages").add({
-      message: input,
-      name: fullname,
+      message: data.input,
       image:props.image,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
-
     dummy.current.scrollIntoView({ behavior: "smooth" });
-
-    setInput("");
-
+    e.target.reset();
   };
 
   return (
@@ -88,7 +85,6 @@ const Messages = (props) => {
           <Message
             key={id}
             message={message}
-            fullname={fullname}
             image={image}
             dummy={dummy}
           />
@@ -99,23 +95,24 @@ const Messages = (props) => {
       </div>
 
       <div className="messages__form">
-        <form className="messages__formPosition">
+        <form onSubmit={handleSubmit(sendMessage)} className="messages__formPosition">
           <FormControl fullWidth className="messages__formControl">
             <TextFieldCustomized
+              inputRef={register}
+              name='input'
               type="text"
               className="messages__input"
               color="secondary"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              autoFocus
+              defaultValue=""
+
             />
             <Button
-            classes={{root:classes.button}}
+              classes={{root:classes.button}}
               className="messages__button"
               variant="contained"
-              // disabled={!input}
               color="secondary"
               type="submit"
-              onClick={sendMessage}
             >
               Send message
             </Button>

@@ -1,9 +1,7 @@
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import FeedWrapper from "../FeedWrapper";
 import StickyTop from "../../StinckyTop/StickyTop";
-import { Controller, useForm } from "react-hook-form";
-import moment from "moment";
 
 import "./ProfileContainer.css";
 import {
@@ -19,17 +17,10 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import Grid from "@material-ui/core/Grid";
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+
 import { connect } from "react-redux";
-import { signOutThunk } from "../../redux/authentication";
+import { signOutThunk, setIsAuth } from "../../redux/authentication";
 import {
-  setUserName,
-  setFullName,
   setUserInfoThunk,
   withSignOutThunk,
 } from "../../redux/profile-reducer";
@@ -37,10 +28,10 @@ import { setIsFetching } from "../../redux/home-reducer";
 
 import db from "../../firebase";
 import { KeyboardReturn } from "@material-ui/icons";
-import { userAPI } from "../../api/restAPI";
 import { compose } from "redux";
 import { PrivateRouteHoc } from "../../hoc/PrivateRouteHoc";
 import ProfileInfoHoc from "../../hoc/ProfileInfoHoc";
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,22 +48,16 @@ const useStyles = makeStyles((theme) => ({
 
 const ProfileContainer = (props) => {
   const [postImage, setPostImage] = useState(props.image);
-  const [status, setStatus] = useState(props.status);
-  const [fullname, setFullName] = useState(props.fullname);
-  const [location, setLocation] = useState(props.location);
-  const [username, setUsername] = useState(props.username);
-
   const [isFetching, setIsFetching] = useState(false);
   const [editProfile, setEditProfile] = useState(true);
-  
 
   const [isDisabled, setIsDisabled] = useState(true);
 
-  let history = useHistory();
+  const history = useHistory();
 
-  const handleDate = (date) => {
-    alert(date);
-  };
+  const { register, handleSubmit } = useForm();
+
+  const classes = useStyles();
 
   const theme = createMuiTheme({
     palette: {
@@ -103,20 +88,15 @@ const ProfileContainer = (props) => {
   };
 
   const handleEditProfile = () => {
-    setEditProfile(true)
-
     const fileInput = document.getElementById("imageInput");
+
     fileInput.click();
   };
 
   const handleLogOut = () => {
     console.log("Logged out!");
 
-    // props.setCurrentUserId("");
-    // props.setFullName("");
-    // props.setUserName("");
-    // props.setUserEmail("");
-    // props.signOutThunk()
+    props.signOutThunk();
     props.withSignOutThunk();
 
     history.push("/signup");
@@ -124,10 +104,8 @@ const ProfileContainer = (props) => {
 
   //--------- SAVE INFO ---------
   const onSubmit = (data) => {
-
     setEditProfile(true);
 
-    console.log(postImage, "IMAGE:::::");
     props.setUserInfoThunk(
       data.fullname,
       data.username,
@@ -140,38 +118,21 @@ const ProfileContainer = (props) => {
   };
 
   const handleEdit = () => {
-    setEditProfile(false)
+    setEditProfile(false);
 
     setIsDisabled(!isDisabled);
   };
 
-  //---------  HOOKS ---------
-  useEffect(() => {
-    setFullName(props.fullName);
-    setStatus(props.status);
-    setLocation(props.location);
-    setUsername(props.username);
-    setPostImage(props.image);
-  }, [
-    props.fullname,
-    props.status,
-    props.location,
-    props.date,
-    props.username,
-    props.image,
-  ]);
-
-  const { register, handleSubmit} = useForm();
-
-  const classes = useStyles();
-
   return (
     <FeedWrapper>
       <StickyTop header={"Profile"} />
-      <Tooltip title="Logout"  className="profileContainer__logout">
-        <IconButton onClick={handleLogOut} style={{ backgroundColor: 'transparent' }}>
+      <Tooltip title="Logout" className="profileContainer__logout">
+        <IconButton
+          onClick={handleLogOut}
+          style={{ backgroundColor: "transparent" }}
+        >
           <KeyboardReturn color="secondary" />
-          <span>Log out</span>
+          <span>Sign out</span>
         </IconButton>
       </Tooltip>
       <div className={!isDisabled ? "profile__Enabled" : "profile__Disabled"}>
@@ -216,7 +177,7 @@ const ProfileContainer = (props) => {
                 >
                   <TextField
                     inputRef={register}
-                    defaultValue={username}
+                    defaultValue={props.username}
                     required
                     autoFocus
                     fullWidth
@@ -229,7 +190,7 @@ const ProfileContainer = (props) => {
                   />
                   <TextField
                     inputRef={register}
-                    defaultValue={fullname}
+                    defaultValue={props.fullname}
                     required
                     fullWidth
                     disabled={isDisabled}
@@ -241,7 +202,7 @@ const ProfileContainer = (props) => {
                   />
                   <TextField
                     inputRef={register}
-                    defaultValue={status}
+                    defaultValue={props.status}
                     autoFocus
                     fullWidth
                     disabled={isDisabled}
@@ -253,7 +214,7 @@ const ProfileContainer = (props) => {
                   />
                   <TextField
                     inputRef={register}
-                    defaultValue={location}
+                    defaultValue={props.location}
                     fullWidth
                     disabled={isDisabled}
                     variant="outlined"
@@ -263,17 +224,24 @@ const ProfileContainer = (props) => {
                     id="location"
                   />
                   <div className="profileContainer__buttons">
-                  <Button variant="outlined" color="primary" type="submit" variant={!editProfile ? "contained" : "outlined"}>
-                    Save
-                  </Button>
-                  <Button
-                    variant={editProfile ? "contained" : "outlined"}
-                    id="profile__editButton"
-                    onClick={handleEdit}
-                    color="primary"
-                  >
-                    Edit
-                  </Button>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      type="submit"
+                      disabled={editProfile}
+                      variant={!editProfile ? "contained" : "outlined"}
+                    >
+                      Save
+                    </Button>
+                    <Button
+                      disabled={!editProfile}
+                      variant={editProfile ? "contained" : "outlined"}
+                      id="profile__editButton"
+                      onClick={handleEdit}
+                      color="primary"
+                    >
+                      Edit
+                    </Button>
                   </div>
                 </form>
               </Container>
@@ -305,5 +273,6 @@ export default compose(
     withSignOutThunk,
     signOutThunk,
     setUserInfoThunk,
+    setIsAuth,
   })
 )(ProfileContainer);
