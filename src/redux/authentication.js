@@ -73,13 +73,16 @@ export const setPasswordConfirmation = (confirm) => ({
 
 ////              THUNKS             ////
 
-export const signUpThunk = (data) => {
+export const signUpThunk = (data,history) => {
   return async (dispatch) => {
-    await authAPI.signUp(data);
-    dispatch(setIsAuth(true));
-    dispatch(setUserEmail(data.email));
-    dispatch(setPasswordConfirmation(data.password));
-    dispatch(setPassword(data.passwordConfirm));
+    await authAPI.signUp(data,history).then(()=>{
+      dispatch(setIsAuth(true));
+      dispatch(setUserEmail(data.email));
+      dispatch(setPasswordConfirmation(data.password));
+      dispatch(setPassword(data.passwordConfirm));
+    })
+   
+    
   };
 };
 export const signOutThunk = () => {

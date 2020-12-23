@@ -4,13 +4,13 @@
     cursor: pointer;
     
 }
-/* .sidebarOption:hover{
+.sidebarOption:hover{
     background-color: var(--breeab-background);
     border-radius: 0;
     border-right: 2px solid var(--breeab-color);
     color:var(--breeab-color);
     transition: color 0.2s ease-out;
-} */
+}
 .sidebarOption > .MuiSvgIcon-root{ 
     padding:20px
 }
@@ -20,6 +20,6 @@
     margin-right: 20px;
 
 }
-/* .sidebar--active{
+.sidebar--active{
     color: var(--breeab-color);
-} */
+}

@@ -3,7 +3,7 @@ a{
     color: inherit;
 }
 .sidebar{
-    flex: 0.2; /* use 20% of the screen */
+    flex: 0.2; 
     min-width: 230px;
     padding-top: 10px;
     background-color:rgb(34, 34, 34);
@@ -35,13 +35,12 @@ a{
     display: inline;
 }
 .sidebar__profile{
-    /* color:white; */
     display: flex;
     align-items: center;
     cursor: pointer;
     font-weight: 900;
     font-size: 20px;
-    margin-right: 20px;
+    margin:30px 20px 20px 0px;
     
 }
 .sidebar__profileImage{

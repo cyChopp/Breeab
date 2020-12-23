@@ -7,6 +7,7 @@ import { setPostsListThunk } from "../../redux/list-reducer";
 import { connect } from "react-redux";
 import ListInfoHoc from "../../hoc/ListInfoHoc";
 import ListPost from "./ListPost";
+import {setShowUserInfo} from '../../redux/showUser-reducer';
 
 const List = (props) => {
   const [postsList, setPostsList] = useState(props.postsList);
@@ -21,7 +22,7 @@ const List = (props) => {
         <StickyTop header={"List"} />
 
         {postsList.map((post) => (
-          <ListPost key={post.id} post={post} />
+          <ListPost key={post.id} post={post} setShowUserInfo={props.setShowUserInfo} />
         ))}
       </FeedWrapper>
     </>
@@ -32,7 +33,7 @@ const mapStateToProps = (state) => ({
   postsList: state.list.postsList,
 });
 export default compose(
-  ListInfoHoc,
   PrivateRouteHoc,
-  connect(mapStateToProps, { setPostsListThunk })
+  ListInfoHoc,
+  connect(mapStateToProps, { setPostsListThunk,setShowUserInfo})
 )(List);

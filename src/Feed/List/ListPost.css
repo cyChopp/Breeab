@@ -11,6 +11,7 @@
 }
 .post--avatar{
     padding-right: 10px;
+    cursor: pointer;
 }
 .post--body {
     flex: 1;

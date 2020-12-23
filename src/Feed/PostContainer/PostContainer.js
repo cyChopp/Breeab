@@ -71,21 +71,6 @@ function PostContainer(props) {
       setPostText(data.postText);
       setPostImage(postImage);
       // e.preventDefault();
-      console.log(data, "post data");
-      console.log(
-        props.fullname,
-        ":",
-        props.username,
-        ":",
-        time,
-        ":",
-        data.postText,
-        ":",
-        postImage,
-        ":",
-        props.currentUserId,
-        "post data"
-      );
       setTime(moment(Date().toLocaleString()).format("Do hh:mm:ss a YYYY"));
 
       props.setPostThunk(
@@ -95,6 +80,7 @@ function PostContainer(props) {
         data.postText,
         postImage,
         props.image,
+        props.status,
         props.currentUserId
       );
       e.target.reset();
@@ -171,6 +157,7 @@ const mapStateToProps = (state) => ({
   fullname: state.profile.fullname,
   username: state.profile.username,
   image: state.profile.image,
+  status:state.profile.status
 });
 
 export default compose(

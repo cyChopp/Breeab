@@ -17,7 +17,6 @@ const SetDefaultProfileInfo = (Component) => {
 
     const NewComponent = (props)=>{
 
-        console.log(props.currentUserId,"pop")
         useEffect(() => {
             if(props.currentUserId != "" && props.setDefaultInfo === false){
                 

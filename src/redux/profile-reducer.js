@@ -106,6 +106,8 @@ export const setUserInfoThunk = (fullname, username, status, location,image, uid
 
 export const getUserThunk = (uid) => {
   return async (dispatch) => {
+    
+    if(uid){
     const userInfo = await userAPI.getUserInfo(uid);
     dispatch(setUserName(userInfo.data().username));
     dispatch(setFullName(userInfo.data().fullname));
@@ -113,6 +115,7 @@ export const getUserThunk = (uid) => {
     dispatch(setUserLocation(userInfo.data().location));
     dispatch(setImage(userInfo.data().image))
     dispatch(setIsProfileFetching(false));
+    }
   };
 };
 
@@ -121,8 +124,8 @@ export const withSignOutThunk = ()=>{
 
       await authAPI.signOut();
 
-      dispatch(setUserName(""));
-      dispatch(setFullName(""));
+      dispatch(setUserName("none"));
+      dispatch(setFullName("Anonymous"));
       dispatch(setUserStatus(""));
       dispatch(setUserLocation(""));
       dispatch(setImage(""));

@@ -7,6 +7,7 @@ import MessageRoundedIcon from "@material-ui/icons/MessageRounded";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import ListRoundedIcon from "@material-ui/icons/ListRounded";
 import AssignmentIndRoundedIcon from "@material-ui/icons/AssignmentIndRounded";
+import RecentActorsIcon from '@material-ui/icons/RecentActors';
 
 import {
   Avatar,
@@ -48,8 +49,8 @@ const Sidebar = (props) => {
           </div>
         </NavLink>
       )}
-      <NavLink activeStyle ={{color:'#c2164f'}}  to="/home">
-        <SidebarOption  Icon={HomeRoundedIcon} text="Home" />
+      <NavLink activeStyle ={{color:'#c2164f'}} exact  to="/">
+         <SidebarOption  Icon={HomeRoundedIcon} text="Home" /> 
       </NavLink>
 
       <NavLink  activeStyle ={{color:'#c2164f'}} to="/profile">
@@ -57,12 +58,16 @@ const Sidebar = (props) => {
         <SidebarOption Icon={AccountCircleIcon} text="Profile" />
       </NavLink>
 
-      <NavLink  activeStyle ={{color:'#c2164f'}} to="/messages">
-        <SidebarOption Icon={MessageRoundedIcon} text="Messages" />
+      <NavLink  activeStyle ={{color:'#c2164f'}} to="/chat">
+        <SidebarOption Icon={MessageRoundedIcon} text="Chat" />
       </NavLink>
 
       <NavLink  activeStyle ={{color:'#c2164f'}} to="/list">
         <SidebarOption Icon={ListRoundedIcon} text="List" />
+      </NavLink>
+
+      <NavLink  activeStyle ={{color:'#c2164f'}} to="/followers">
+        <SidebarOption Icon={RecentActorsIcon} text="Followers" />
       </NavLink>
 
       {props.isAuth ? (

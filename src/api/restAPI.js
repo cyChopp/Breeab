@@ -1,22 +1,32 @@
 import db from "../firebase";
-import React from "react";
+
+
 
 //-------------- AUTHENTICATION API --------------
 export const authAPI = {
+
+
   signOut() {
     return db.auth().signOut();
   },
 
-  signUp(data) {
+  signUp(data,history) {
+    console.log(history,data)
     return db
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
       .then((u) => {
-        authAPI.setUserAuthInfo(u.user.email, u.user.uid);
         if (u.user.uid) {
-          console.log(u.user.uid, "check");
-          userAPI.setProfileInfo("", "", "", "", "", u.user.uid);
+          console.log(u.user.uid,"check");
+          userAPI.setProfileInfo("Anonymous", "none", "", "", "", u.user.uid);
+          authAPI.setUserAuthInfo(u.user.email, u.user.uid);
         }
+
+      })
+      .catch((error) => {
+        alert(error,'failed to sign up')
+      //return history.push('/signup')
+        
       });
   },
 
@@ -65,7 +75,7 @@ export const userAPI = {
 //-------------- USER POST API --------------
 
 export const postsAPI = {
-  addPost(fullname, username, time, postMessage, postImage, profile, uid) {
+  addPost(fullname, username, time, postMessage, postImage, profile, status,uid) {
     return db
       .firestore()
       .collection("posts")
@@ -77,10 +87,11 @@ export const postsAPI = {
         time: time,
         text: postMessage,
         image: postImage,
+        status:status,
         profile: profile,
       })
       .then(
-        listAPI.addPostsList(fullname,username,time,postMessage,postImage,profile,uid)
+        listAPI.addPostsList(fullname,username,time,postMessage,postImage,profile,status,uid)
 
       
       )
@@ -89,7 +100,7 @@ export const postsAPI = {
 };
 //-------------- POSTS LIST API --------------
 export const listAPI = {
-  addPostsList(fullname,username,time,postMessage,postImage,profile,uid){
+  addPostsList(fullname,username,time,postMessage,postImage,profile,status,uid){
     console.log(fullname,username, time, postMessage, postImage,profile, uid,"::::::::")
     return  db
         .firestore()
@@ -102,6 +113,7 @@ export const listAPI = {
             text: postMessage,
             image: postImage,
             profile: profile,
+            status:status,
             uid:uid
           }
         )

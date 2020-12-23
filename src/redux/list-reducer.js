@@ -39,7 +39,6 @@ export const setPostsListThunk = () => {
       .orderBy("time", "desc")
       .onSnapshot((snapshot) => {
         dispatch(setList(snapshot.docs.map((doc) => ({ ...doc.data() ,id:doc.id}))));
-        // setList(snapshot.docs.map((doc) => ({ ...doc.data(), uid: doc.uid })));
       });
       
     };

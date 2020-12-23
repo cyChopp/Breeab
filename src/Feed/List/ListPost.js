@@ -8,6 +8,7 @@ import RepeatRoundedIcon from "@material-ui/icons/RepeatRounded";
 
 import React, { forwardRef, useEffect, useState } from "react";
 import "./ListPost.css";
+import { useHistory } from "react-router-dom";
 // import EditButton from "../../../DeleteButton/EditButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,17 +25,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const ListPost = (props) => {
+
+  const history = useHistory();
+
+  const seeProfile = ()=>{
+    props.setShowUserInfo(props.post);
+    console.log(props.post,'listPOST""""')
+    history.push(`user/${props.post.username}`)
+
+  }
 
 
   const classes = useStyles();
-console.log(props.post,"::::")
-
   return (
     <div className="feed--post" >
       <div className={classes.root}>
-        <div className="post--avatar">
-          {/* <Avatar src={props.post.profile} className={classes.large} /> */}
+        <div className="post--avatar" onClick={seeProfile}>
           <Avatar src={props.post.profile} className={classes.large} />
         </div>
       </div>

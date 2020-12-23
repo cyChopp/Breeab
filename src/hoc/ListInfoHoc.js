@@ -9,7 +9,6 @@ const ListInfoHoc = (Component) => {
     const NewComponent = (props)=>{
 
         useEffect(() => {
-            console.log('request;;;;')
             props.setPostsListThunk()
 
         }, [])

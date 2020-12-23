@@ -8,6 +8,7 @@ import profileReducer from './profile-reducer';
 import postReducer from './post-reducer';
 import listReducer from './list-reducer';
 import chatReducer from './chat-reducer';
+import showUserReducer from './showUser-reducer';
 
 
 let reducers = combineReducers({
@@ -17,6 +18,7 @@ let reducers = combineReducers({
     post:postReducer,
     list:listReducer,
     chat:chatReducer,
+    showUser:showUserReducer
 });
 
 const store = createStore(reducers,composeWithDevTools(applyMiddleware(thunk)));

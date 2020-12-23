@@ -22,10 +22,7 @@ const PostInfoHoc = (Component) => {
         return (
             <>
             <Component {...props}/>
-            {/* {props.isInfoLoaded ? ( <Component {...props}/>) : ( <div className="preloader__Wrapper">
-                                            <CircularProgress color="secondary" size={20} />
-                                                    </div>)
-            } */}
+            
             </>
         )
         

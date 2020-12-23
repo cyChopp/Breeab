@@ -1,5 +1,5 @@
 import { Avatar, Card, CardContent, makeStyles, Typography } from "@material-ui/core";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect } from "react";
 import './Message.css'
 
 const useClasses = makeStyles((theme) => ({
@@ -15,9 +15,16 @@ const useClasses = makeStyles((theme) => ({
   },
 }));
 
+
+
 const Message = (props) => {
 
+
   const styles = useClasses();
+
+  useEffect(()=>{
+console.log(props.message.name," :::: ", props.fullname )
+  },[])
 
   return (
     <>

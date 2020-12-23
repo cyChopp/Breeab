@@ -12,6 +12,8 @@ import {  NavLink, useHistory } from "react-router-dom";
 import FeedWrapper from "../Feed/FeedWrapper";
 import StickyTop from "../StinckyTop/StickyTop";
 import "./SignUp.css";
+import { userAPI } from "../api/restAPI";
+import db from "../firebase";
 
 const theme = createMuiTheme({
   palette: {
@@ -37,19 +39,20 @@ const SignUp = (props) => {
 
 
   const handleSignUp = (data) => {
-    props.signUpThunk(data);
+    console.log(data,'info data')
+     props.signUpThunk(data,history);
 
-    // return history.push("/profile");
+
+
   };
 
   useEffect(() => {
-    if(props.pageRedirect){
-      console.log("YESSSSS")
-      history.push('/profile')
-    }
-  
     setAuth(props.isAuth);
-  }, [props.email, props.password, props.passwordConfirmation, props.isAuth]);
+    if(props.isAuth){
+     history.push('/profile')
+    }
+
+  }, [props.isAuth]);
   // user Exists?
 
   return (

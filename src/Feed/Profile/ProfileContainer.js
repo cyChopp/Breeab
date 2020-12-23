@@ -126,15 +126,16 @@ const ProfileContainer = (props) => {
   return (
     <FeedWrapper>
       <StickyTop header={"Profile"} />
-      <Tooltip title="Logout" className="profileContainer__logout">
-        <IconButton
-          onClick={handleLogOut}
-          style={{ backgroundColor: "transparent" }}
-        >
-          <KeyboardReturn color="secondary" />
-          <span>Sign out</span>
-        </IconButton>
-      </Tooltip>
+      <Button
+        onClick={handleLogOut}
+        className="profileContainer__logout"
+        variant="outlined"
+        color="secondary"
+        type="submit"
+        variant="outlined"
+      >
+      Sign out
+      </Button>
       <div className={!isDisabled ? "profile__Enabled" : "profile__Disabled"}>
         <div className="profile__UploadWrapper">
           <div className="profile__Wrapper">
@@ -168,7 +169,7 @@ const ProfileContainer = (props) => {
         </div>
 
         <ThemeProvider theme={theme}>
-          {true ? (
+          {/* {true ? ( */}
             <div className="container">
               <Container className="form__Wrapper" maxWidth="xs">
                 <form
@@ -246,9 +247,9 @@ const ProfileContainer = (props) => {
                 </form>
               </Container>
             </div>
-          ) : (
+          {/* ) : (
             <CircularProgress color="secondary" size={20} />
-          )}
+          )} */}
         </ThemeProvider>
       </div>
     </FeedWrapper>

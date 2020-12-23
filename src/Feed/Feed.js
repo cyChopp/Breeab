@@ -20,16 +20,21 @@ import db from "../firebase";
 import { compose } from "redux";
 import IsAuthHoc from "../hoc/IsAuthHoc";
 import SignIn from "../SignIn/SignIn";
+import ShowUser from "./ShowUser/ShowUser";
 
 const Feed = (props) => {
   return (
     <>
       <Switch>
-        <Route exact path="/home" render={() => <HomeContainer />} />
+        <Route exact path="/" render={() => <HomeContainer />} />
         <Route path="/profile" render={() => <ProfileContainer />} />
-        <Route path="/messages" render={() => <Messages fullname={props.fullname}image={props.image}/>}/>
+        <Route path="/chat" render={() => <Messages fullname={props.fullname}image={props.image}/>}/>
         <Route path="/list" component={List} />
-        <Route path="/signin" component={SignIn} />
+        <Route path="/user" component={ShowUser}/>
+
+        <Route path="/signin" render={()=>(<SignIn  isAuth={props.isAuth} />)} />
+
+        
         <Route
           path="/signup"
           render={() => (
@@ -69,6 +74,7 @@ const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   password: state.auth.password,
   passwordConfirmation: state.auth.passwordConfirmation,
+  //showUserProfile:s
 });
 
 export default compose(

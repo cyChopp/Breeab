@@ -66,25 +66,29 @@ const Messages = (props) => {
 
   const sendMessage = (data,e) => {
     e.preventDefault();
-
+    if(data.input !== ''){
     db.firestore().collection("messages").add({
       message: data.input,
       image:props.image,
+      name:props.fullname,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     dummy.current.scrollIntoView({ behavior: "smooth" });
+
+  }
     e.target.reset();
   };
 
   return (
     <FeedWrapper className="messages__feedWrapper">
-      <StickyTop header={"Message"} />
+      <StickyTop header={"Chat"} />
       <div className="messages__chat">
         {/* <div > */}
         {messages.map(({ id, message,image }) => (
           <Message
             key={id}
             message={message}
+            fullname={props.fullname}
             image={image}
             dummy={dummy}
           />
@@ -105,7 +109,6 @@ const Messages = (props) => {
               color="secondary"
               autoFocus
               defaultValue=""
-
             />
             <Button
               classes={{root:classes.button}}
