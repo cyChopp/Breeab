@@ -45,7 +45,8 @@ const Post = forwardRef((props, ref) => {
   };
 
   return (
-    <div className="feed--post" ref={ref}>
+    <div className="feed__wrapper">
+    <div className={props.mobile ? "feed__postMobile":"feed__post"} ref={ref}>
       <div className={classes.root}>
         <div className="post--avatar">
           {/* <Avatar src={props.post.profile} className={classes.large} /> */}
@@ -73,6 +74,8 @@ const Post = forwardRef((props, ref) => {
               </span>
               <span className="post-verified">
                 {"  "}
+                {!props.mobile && 
+                <div>
                 <VerifiedUserRoundedIcon className="post--budge" />
                 <span>
                   {"  @"}
@@ -80,6 +83,9 @@ const Post = forwardRef((props, ref) => {
                     ? props.post.username
                     : props.username}
                 </span>
+                </div>
+                
+                }
               </span>
             </h3>
 
@@ -110,6 +116,7 @@ const Post = forwardRef((props, ref) => {
           <RepeatRoundedIcon id="shareButton"/>
         </div>
       </div>
+    </div>
     </div>
   );
 });

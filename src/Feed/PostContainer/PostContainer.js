@@ -113,8 +113,8 @@ function PostContainer(props) {
               />
             </div>
           </div>
-
-          <div className="input-buttons">
+    
+          <div className={props.mobile ? "input__buttonsMobile":"input__buttons"}>
             {isFetching && (
               <div className="preloader__Wrapper">
                 <CircularProgress color="secondary" size={20} />
@@ -123,7 +123,6 @@ function PostContainer(props) {
 
             <div className="file__uploadWrapper">
               <span>
-                {/* <label  className="custom__FileUpload"> */}
                 <label htmlFor="file-upload" className="custom__FileUpload">
                   Upload file
                 </label>
@@ -136,10 +135,11 @@ function PostContainer(props) {
               />
             </div>
 
-            <div className="post--buttonWrapper">
+            <div className="post__buttonWrapper">
+
               <Button
                 type="submit"
-                className="post--button"
+                className="post__button"
                 disabled={isFetching && true}
               >
                 Post

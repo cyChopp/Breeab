@@ -95,7 +95,7 @@ textarea::-webkit-scrollbar
 } 
 
 
-.post--buttonWrapper{
+.post__buttonWrapper{
     background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
     border: 1px solid  var(--breeab-color) !important;
     border-radius: 18px !important;
@@ -104,7 +104,7 @@ textarea::-webkit-scrollbar
     display: flex;
 
 }
-.post--buttonWrapper:hover{
+.post__buttonWrapper:hover{
     background-color: var(--breeab-color) !important; /* !important overrides the Mui theme*/
     transition:all 0.1s ease-out !important;
     border-radius: 10px !important;
@@ -112,7 +112,7 @@ textarea::-webkit-scrollbar
     font-weight: 300 !important;
     text-transform: inherit !important;
 }
-.post--button{
+.post__button{
 
     color:#E2E2E2 !important;
     font-weight: 300 !important;
@@ -123,18 +123,23 @@ textarea::-webkit-scrollbar
 
 }
 
-.input-buttons{
+.input__buttons{
 display: flex;
 padding-right: 20px;
 padding-bottom: 20px;
 margin-top: 30px !important;
  margin-left: auto !important;
-
 }
-/* 
-.input-buttons > span{
+.input__buttonsMobile{
+    display: flex;
+    padding-right: 10px;
+    padding-bottom: 20px;
+    margin-top: 30px !important;
+     margin-left: auto !important;
+    }
+    
 
-} */
+
 .file__uploadWrapper{
     cursor: pointer;
     padding-top: 8px !important;
@@ -146,3 +151,48 @@ margin-top: 30px !important;
     align-items: center;
     padding-right: 20px;
 }
+
+/* @ MEDIA QUERIES */
+
+/* @media all and (max-width: 410px)  {
+     .input-buttons{
+        display: flex;
+        flex-direction: column;
+         margin-left: auto !important;
+         margin-left: auto !important;
+        
+    }
+    .post__buttonWrapper{
+        margin-right: 40px;
+    }
+    .file__uploadWrapper{
+        padding-bottom: 20px;
+
+    }
+    .custom__FileUpload {
+        background-color:rgba(126, 126, 126, 0.083) !important; /*!important overrides the Mui theme*/
+        /* border: 1px solid  var(--breeab-color) !important;
+        border-radius: 18px !important;
+        color:#E2E2E2 !important;
+        font-weight: 300 !important;
+        font-size: 20px !important; 
+        text-transform: inherit !important;
+        height: 40px !important;
+        width: 120px;
+        font-family: 'Montserrat', sans-serif !important;
+        transition: all 0.1s ease-in !important;
+        margin-right: 20px !important;
+        padding: 7px !important;
+    }
+    .post--button{ */
+
+        /* color:#E2E2E2 !important;
+        font-weight: 300 !important;
+        font-size: 20px !important; 
+        text-transform: inherit !important;
+        width: 120px;
+        font-family: 'Montserrat', sans-serif !important; */
+    
+  /*  }
+    
+  } */

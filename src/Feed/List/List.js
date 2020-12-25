@@ -19,10 +19,10 @@ const List = (props) => {
   return (
     <>
       <FeedWrapper>
-        <StickyTop header={"List"} />
+        <StickyTop header={"List"} mobile={props.mobile}/>
 
         {postsList.map((post) => (
-          <ListPost key={post.id} post={post} setShowUserInfo={props.setShowUserInfo} />
+          <ListPost key={post.id} post={post} setShowUserInfo={props.setShowUserInfo} mobile={props.mobile}/>
         ))}
       </FeedWrapper>
     </>

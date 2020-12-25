@@ -1,0 +1,38 @@
+a{
+    text-decoration: none;
+    color: inherit;
+}
+.sidebar{
+    /* flex: 0.1; 
+    background-color:rgb(34, 34, 34); */
+}
+
+/* .sidebar--post{
+    background-color: var(--breeab-color) !important; 
+    border-radius:0 !important;
+    border: none !important;
+    color:#E2E2E2 !important;
+    font-weight: 600 !important;
+    font-size: 20px !important; 
+    text-transform: inherit !important;
+    height: 50px !important;
+    margin-top: 50px !important;
+    font-family: 'Montserrat', sans-serif !important;
+
+}
+.sidebar__profileWrapper{
+    display: inline;
+}
+.sidebar__profile{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 900;
+    font-size: 20px;
+    margin:30px 20px 20px 0px;
+    
+}
+.sidebar__profileImage{
+    margin: 0px 20px 10px 20px;
+
+} */

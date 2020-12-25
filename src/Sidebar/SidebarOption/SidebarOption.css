@@ -4,13 +4,7 @@
     cursor: pointer;
     
 }
-.sidebarOption:hover{
-    background-color: var(--breeab-background);
-    border-radius: 0;
-    border-right: 2px solid var(--breeab-color);
-    color:var(--breeab-color);
-    transition: color 0.2s ease-out;
-}
+
 .sidebarOption > .MuiSvgIcon-root{ 
     padding:20px
 }
@@ -22,4 +16,11 @@
 }
 .sidebar--active{
     color: var(--breeab-color);
+}
+.sidebarOption:hover{
+    background-color: var(--breeab-background);
+    border-radius: 0;
+    border-right: 2px solid var(--breeab-color);
+    color:var(--breeab-color);
+    transition: color 0.2s ease-out;
 }

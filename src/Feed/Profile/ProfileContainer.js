@@ -125,7 +125,7 @@ const ProfileContainer = (props) => {
 
   return (
     <FeedWrapper>
-      <StickyTop header={"Profile"} />
+      <StickyTop header={"Profile"} mobile={props.mobile}/>
       <Button
         onClick={handleLogOut}
         className="profileContainer__logout"
@@ -247,9 +247,7 @@ const ProfileContainer = (props) => {
                 </form>
               </Container>
             </div>
-          {/* ) : (
-            <CircularProgress color="secondary" size={20} />
-          )} */}
+
         </ThemeProvider>
       </div>
     </FeedWrapper>

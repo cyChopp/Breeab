@@ -32,15 +32,16 @@ const HomeContainer = (props) => {
   return (
     <>
       {true && (
-        <FeedWrapper>
-          <StickyTop header={"Home"} />
+        <FeedWrapper mobile={props.mobile}>
+          <StickyTop header={"Home"} mobile={props.mobile} />
 
-          <PostContainer />
+          <PostContainer mobile={props.mobile} />
 
           {posts.map((post) => (
             <Post
               key={post.id}
               post={post}
+              mobile={props.mobile}
             />
           ))}
         </FeedWrapper>

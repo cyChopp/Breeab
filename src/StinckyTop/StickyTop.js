@@ -3,7 +3,7 @@ import "./StickyTop.css"
 
 const StickyTop = (props) => {
     return (
-       <div className="sticky">
+       <div  className={props.mobile ? 'stickyMobile' : 'sticky'}>
         <h2>{props.header}</h2>
       </div>
 

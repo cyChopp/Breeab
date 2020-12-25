@@ -65,6 +65,11 @@
 }
 .profile__Disabled{
   padding-top: 140px !important;
+  margin-bottom: 50px;
+
+}
+.profile__DisabledMobile{
+  padding-top: 140px !important;
 }
 
 .file__uploadWrapper {

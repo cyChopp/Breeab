@@ -9,40 +9,62 @@
   display: none
 } 
 
-.messages__chat {
 
-  width: 95%;
-  margin-right: auto;
-  margin-left: auto;
-  height: 74%;
-  padding-top: 20px;
+
+
+
+
+
+.messages__wrapper{
+display: flex;
+flex-direction: column;
+height: 92vh;
+}
+
+.messages__chat{
+  flex: 0.9;
+  padding: 10px 10px 100px 10px;
   padding-bottom:100px ;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width:none ;
-
 }
-.messages__formPosition {
-  height: 15%;
+.messages__form{
+  flex: 0.1;
+  }
+  
 
+
+.messages__chatMobile{
+  flex: 0.7;
+  padding: 10px 10px 100px 10px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width:none ;
 }
+  .messages__formMobile{
+  flex: 0.1;
+  }
+
+
+
+
+
+
 .messages__formControl {
   display: flex !important;
   flex-direction: row !important; 
-  /* z-index: 1 !important; */
-  /* position: fixed ; */
-  /* bottom: 0px !important; */
+ 
 
 }
 .messages__input {
   height: 40px !important;
-}
+  z-index: 2 !important;
 
-.messages__form{
-/* width: 80%; */
-/* padding-top: 1em; */
 
 }
+
+
 
 .messages__input {
   flex: 0.8;

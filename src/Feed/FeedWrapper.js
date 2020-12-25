@@ -1,9 +1,10 @@
 import React from 'react';
 import './FeedWrapper.css'
 
-const FeedWrapper = ({children}) => {
+const FeedWrapper =({children})=>{
+    // alert(props.mobile)
     return (
-        <div className="feed ">
+        <div className='feed'>
             {children}
         </div>
     )

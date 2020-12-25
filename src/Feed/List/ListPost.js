@@ -51,14 +51,19 @@ const ListPost = (props) => {
           <div className="post--textHeader">
             <h3 className="user__Infowrapper">
               <span className="post--userName">{props.post.fullname} </span>
+             
               <span className="post-verified">
                 {"  "}
                 <VerifiedUserRoundedIcon className="post--budge" />
+                {!props.mobile &&(
                 <span>
                   {"  @"}
                   {props.post.username}
                 </span>
+              )
+              }
               </span>
+
             </h3>
           </div>
 

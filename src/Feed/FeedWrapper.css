@@ -1,9 +1,10 @@
 .feed{
-    flex: 0.7;
-    max-width: 70%; 
+    flex: 1;
+    width: 100%; 
     overflow-y: scroll;
     -ms-overflow-style:none;
     scrollbar-width:none ;
+    height: 100vh;
 
 }
 

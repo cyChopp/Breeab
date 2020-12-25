@@ -26,13 +26,13 @@ const Feed = (props) => {
   return (
     <>
       <Switch>
-        <Route exact path="/" render={() => <HomeContainer />} />
-        <Route path="/profile" render={() => <ProfileContainer />} />
-        <Route path="/chat" render={() => <Messages fullname={props.fullname}image={props.image}/>}/>
-        <Route path="/list" component={List} />
+        <Route exact path="/" render={() => <HomeContainer mobile={props.mobile} />} />
+        <Route path="/profile" render={() => <ProfileContainer mobile={props.mobile} />} />
+        <Route path="/chat" render={() => <Messages fullname={props.fullname} image={props.image} mobile={props.mobile}/>}/>
+        <Route path="/list" render={()=><List mobile={props.mobile}/>} />
         <Route path="/user" component={ShowUser}/>
 
-        <Route path="/signin" render={()=>(<SignIn  isAuth={props.isAuth} />)} />
+        <Route path="/signin" render={()=>(<SignIn  isAuth={props.isAuth}  mobile={props.mobile}/>)} />
 
         
         <Route
@@ -74,7 +74,6 @@ const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
   password: state.auth.password,
   passwordConfirmation: state.auth.passwordConfirmation,
-  //showUserProfile:s
 });
 
 export default compose(
