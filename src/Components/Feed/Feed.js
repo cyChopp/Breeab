@@ -22,6 +22,7 @@ const Feed = (props) => {
               fullname={props.fullname}
               image={props.image}
               mobile={props.mobile}
+              
             />
           )}
         />
