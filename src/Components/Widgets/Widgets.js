@@ -1,6 +1,5 @@
 import React from 'react';
 import SearchIcon from "@material-ui/icons/Search"
-import { TwitterTimelineEmbed,TwitterShareButton,TwitterTweetEmbed} from 'react-twitter-embed';
 
 const Widgets=()=>{
     return (
