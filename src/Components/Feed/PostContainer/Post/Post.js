@@ -3,12 +3,13 @@ import VerifiedUserRoundedIcon from "@material-ui/icons/VerifiedUserRounded";
 import TextsmsRoundedIcon from "@material-ui/icons/TextsmsRounded";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import RepeatRoundedIcon from "@material-ui/icons/RepeatRounded";
+import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 import React, { forwardRef, useState } from "react";
 import "./Post.css";
-import db from "../../../firebase";
-import EditButton from "../../../Components/DeleteButton/EditButton";
+import db from "../../../../firebase";
+import EditButton from "../../../DeleteButton/EditButton";
 import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({

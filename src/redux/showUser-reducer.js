@@ -1,4 +1,4 @@
-import {  postsAPI } from "../api/restAPI";
+import { postsAPI } from "../api/restAPI";
 
 const SET_USER_INFO = "SET_USER_INFO";
 

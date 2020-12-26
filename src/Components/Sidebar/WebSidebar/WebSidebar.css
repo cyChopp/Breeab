@@ -1,0 +1,44 @@
+.webSidebar {
+  flex: 0.2;
+  min-width: 50px;
+  padding-top: 10px;
+  height: 100vh;
+  background-color: rgb(34, 34, 34);
+}
+
+.webSidebar__logo {
+  padding-bottom: 20px !important;
+  color: var(--breeab-color) !important;
+  font-family: "Permanent Marker", cursive !important;
+  text-shadow: 2px 2px #871287 !important;
+  font-weight: 300 !important;
+  font-size: 40px !important;
+  padding: 0px 10px 0px 10px;
+}
+.webSidebar__post {
+  background-color: var(--breeab-color) !important;
+  border-radius: 0 !important;
+  border: none !important;
+  color: #e2e2e2 !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  text-transform: inherit !important;
+  height: 50px !important;
+  margin-top: 50px !important;
+  font-family: "Montserrat", sans-serif !important;
+}
+.webSidebar__profileWrapper {
+  display: inline;
+}
+.webSidebar__profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 20px;
+  margin: 30px 20px 20px 0px;
+}
+.webSidebar__profileImage {
+  margin: 0px 20px 10px 20px;
+}

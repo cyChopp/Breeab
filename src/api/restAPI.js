@@ -1,32 +1,23 @@
 import db from "../firebase";
 
-
-
 //-------------- AUTHENTICATION API --------------
 export const authAPI = {
-
-
   signOut() {
     return db.auth().signOut();
   },
 
-  signUp(data,history) {
-    console.log(history,data)
+  signUp(data, history) {
     return db
       .auth()
       .createUserWithEmailAndPassword(data.email, data.password)
       .then((u) => {
         if (u.user.uid) {
-          console.log(u.user.uid,"check");
           userAPI.setProfileInfo("Anonymous", "none", "", "", "", u.user.uid);
           authAPI.setUserAuthInfo(u.user.email, u.user.uid);
         }
-
       })
       .catch((error) => {
-        alert(error,'failed to sign up')
-      //return history.push('/signup')
-        
+        alert(error, "failed to sign up");
       });
   },
 
@@ -61,7 +52,6 @@ export const userAPI = {
     return db.firestore().collection("users").doc(user).get();
   },
   setProfileInfo(fullname, username, status, location, image, uid) {
-    console.log("in Procces!");
     return db.firestore().collection("users").doc(uid).set({
       status: status,
       fullname: fullname,
@@ -75,7 +65,16 @@ export const userAPI = {
 //-------------- USER POST API --------------
 
 export const postsAPI = {
-  addPost(fullname, username, time, postMessage, postImage, profile, status,uid) {
+  addPost(
+    fullname,
+    username,
+    time,
+    postMessage,
+    postImage,
+    profile,
+    status,
+    uid
+  ) {
     return db
       .firestore()
       .collection("posts")
@@ -87,35 +86,44 @@ export const postsAPI = {
         time: time,
         text: postMessage,
         image: postImage,
-        status:status,
+        status: status,
         profile: profile,
       })
       .then(
-        listAPI.addPostsList(fullname,username,time,postMessage,postImage,profile,status,uid)
-
-      
-      )
-  }
-  
+        listAPI.addPostsList(
+          fullname,
+          username,
+          time,
+          postMessage,
+          postImage,
+          profile,
+          status,
+          uid
+        )
+      );
+  },
 };
 //-------------- POSTS LIST API --------------
 export const listAPI = {
-  addPostsList(fullname,username,time,postMessage,postImage,profile,status,uid){
-    console.log(fullname,username, time, postMessage, postImage,profile, uid,"::::::::")
-    return  db
-        .firestore()
-        .collection("postsList")
-        .add(
-          {
-            fullname: fullname,
-            username: username,
-            time: time,
-            text: postMessage,
-            image: postImage,
-            profile: profile,
-            status:status,
-            uid:uid
-          }
-        )
-    }
-}
+  addPostsList(
+    fullname,
+    username,
+    time,
+    postMessage,
+    postImage,
+    profile,
+    status,
+    uid
+  ) {
+    return db.firestore().collection("postsList").add({
+      fullname: fullname,
+      username: username,
+      time: time,
+      text: postMessage,
+      image: postImage,
+      profile: profile,
+      status: status,
+      uid: uid,
+    });
+  },
+};

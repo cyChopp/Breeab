@@ -1,0 +1,50 @@
+.mobileSidebar__logo {
+  padding-bottom: 10px !important;
+  color: var(--breeab-color) !important;
+  font-family: "Permanent Marker", cursive !important;
+  text-shadow: 2px 2px #871287 !important;
+  font-weight: 300 !important;
+  font-size: 40px !important;
+  margin-left: 14px !important;
+}
+.mobileSidebar__profileWrapper {
+  display: inline;
+}
+.mobileSidebar__profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 20px;
+}
+.mobileSidebar__profileImage {
+  margin: 0px 20px 10px 20px;
+}
+
+.mobileSidebar {
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 2;
+  width: 100%;
+  bottom: 0;
+  height: 70px;
+  background-color: rgb(34, 34, 34);
+}
+
+.mobileSidebar__nav {
+  font-family: "Permanent Marker", cursive !important;
+  text-shadow: 2px 2px #871287 !important;
+  display: relative;
+  flex-direction: row;
+}
+.mobileSidebar__navActive {
+  color: var(--breeab-color);
+}
+.mobileSidebar__nav:hover {
+  border-radius: 0;
+  color: var(--breeab-color);
+  transition: color 0.2s ease-out;
+}

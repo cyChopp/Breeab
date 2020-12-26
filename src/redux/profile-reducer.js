@@ -1,5 +1,4 @@
 import { authAPI, userAPI } from "../api/restAPI";
-import { getUserInfoThunk } from "./authentication";
 
 const SET_USER_STATUS = "SET_USER_STATUS";
 const SET_FULL_NAME = "SET_FULL_NAME";
@@ -15,7 +14,7 @@ const initialState = {
   username: "none",
   location: "",
   date: "04/04/2020",
-  image:"",
+  image: "",
   isProfileFetching: true,
 
 };
@@ -93,9 +92,9 @@ export const setImage = (image) => ({
   image,
 });
 
-export const setUserInfoThunk = (fullname, username, status, location,image, uid) => {
+export const setUserInfoThunk = (fullname, username, status, location, image, uid) => {
   return async (dispatch) => {
-    await userAPI.setProfileInfo(fullname, username, status, location,image, uid);
+    await userAPI.setProfileInfo(fullname, username, status, location, image, uid);
     dispatch(setUserStatus(status));
     dispatch(setFullName(fullname));
     dispatch(setUserName(username));
@@ -106,28 +105,28 @@ export const setUserInfoThunk = (fullname, username, status, location,image, uid
 
 export const getUserThunk = (uid) => {
   return async (dispatch) => {
-    
-    if(uid){
-    const userInfo = await userAPI.getUserInfo(uid);
-    dispatch(setUserName(userInfo.data().username));
-    dispatch(setFullName(userInfo.data().fullname));
-    dispatch(setUserStatus(userInfo.data().status));
-    dispatch(setUserLocation(userInfo.data().location));
-    dispatch(setImage(userInfo.data().image))
-    dispatch(setIsProfileFetching(false));
+
+    if (uid) {
+      const userInfo = await userAPI.getUserInfo(uid);
+      dispatch(setUserName(userInfo.data().username));
+      dispatch(setFullName(userInfo.data().fullname));
+      dispatch(setUserStatus(userInfo.data().status));
+      dispatch(setUserLocation(userInfo.data().location));
+      dispatch(setImage(userInfo.data().image))
+      dispatch(setIsProfileFetching(false));
     }
   };
 };
 
-export const withSignOutThunk = ()=>{
-    return async(dispatch)=>{
+export const withSignOutThunk = () => {
+  return async (dispatch) => {
 
-      await authAPI.signOut();
+    await authAPI.signOut();
 
-      dispatch(setUserName("none"));
-      dispatch(setFullName("Anonymous"));
-      dispatch(setUserStatus(""));
-      dispatch(setUserLocation(""));
-      dispatch(setImage(""));
-    }
+    dispatch(setUserName("none"));
+    dispatch(setFullName("Anonymous"));
+    dispatch(setUserStatus(""));
+    dispatch(setUserLocation(""));
+    dispatch(setImage(""));
+  }
 }

@@ -1,5 +1,4 @@
-import { authAPI, userAPI } from "../api/restAPI";
-import moment from "moment";
+import { authAPI } from "../api/restAPI";
 
 const SET_CURRENT_USER_ID = "SET_CURRENT_USER_ID";
 const SET_IS_AUTH = "SET_IS_AUTH";
@@ -73,16 +72,14 @@ export const setPasswordConfirmation = (confirm) => ({
 
 ////              THUNKS             ////
 
-export const signUpThunk = (data,history) => {
+export const signUpThunk = (data, history) => {
   return async (dispatch) => {
-    await authAPI.signUp(data,history).then(()=>{
+    await authAPI.signUp(data, history).then(() => {
       dispatch(setIsAuth(true));
       dispatch(setUserEmail(data.email));
       dispatch(setPasswordConfirmation(data.password));
       dispatch(setPassword(data.passwordConfirm));
-    })
-   
-    
+    });
   };
 };
 export const signOutThunk = () => {
@@ -104,6 +101,5 @@ export const getUserInfoThunk = (uid) => {
     dispatch(setCurrentUserId(currentUserInfo.data().userId));
     dispatch(setUserEmail(currentUserInfo.data().email));
     dispatch(setIsAuth(true));
-
   };
 };
