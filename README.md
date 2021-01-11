@@ -25,3 +25,12 @@ Check it out :[Breeab](https://breeab-3218f.firebaseapp.com/)
 ### Other
     • FLUX architecture
     • BEM
+
+### App preview
+
+
+![](previewProfile.png)
+
+![](previewChat.png)
+
+![](previewList.png)
