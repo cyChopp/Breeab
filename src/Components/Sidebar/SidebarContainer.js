@@ -18,15 +18,15 @@ const SidebarContainer = (props) => {
       >
         {(matches) => (
           <Fragment>
-            {matches.small && (
-              <MobileSidebar
+            {matches.large && (
+              <WebSidebar
                 isAuth={props.isAuth}
                 image={props.image}
                 username={props.username}
               />
             )}
-            {matches.large && (
-              <WebSidebar
+            {matches.small && (
+              <MobileSidebar
                 isAuth={props.isAuth}
                 image={props.image}
                 username={props.username}

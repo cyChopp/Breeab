@@ -8,11 +8,6 @@ const Widgets=()=>{
                 <SearchIcon className="widgets--searchIcon"/>
                 <input placeholder="Search" type="text"/>
             </div>
-            {/* <div className="widgets--widgetContaienr">
-                <TwitterTweetEmbed className="r-14lw9ot" tweetId="1329785897752145921" options={{height:250}} />
-                <TwitterTimelineEmbed sourceType="profile" screenName="dan_abramov" options={{height:350}}/>
-                <TwitterShareButton url={"https://www.facebook.com/Louttchenko/"} options={{text:"#ReactJS" ,via:'louttchenko'}} />
-            </div> */}
         </div>
     )
 }

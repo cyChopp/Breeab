@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Post = forwardRef((props, ref) => {
-  const [uuid, setUuid] = useState(props.currentUserId); 
+  const [uuid, setUuid] = useState(props.currentUserId);
 
   const classes = useStyles();
 
@@ -105,11 +105,12 @@ const Post = forwardRef((props, ref) => {
               <p>{props.post.text}</p>
             </div>
           </div>
+          <div className="post__imageWrapper"> 
 
           <img src={props.post.image} className="post__image" />
-
+</div>
           <div className="post--footer">
-            <FavoriteIcon fontSize="small" id="likeButton" />
+            <FavoriteIcon fontSize="small"  />
             <TextsmsRoundedIcon id="comentButton" />
             <RepeatRoundedIcon id="shareButton" />
           </div>

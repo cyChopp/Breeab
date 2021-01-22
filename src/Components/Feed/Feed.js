@@ -13,7 +13,7 @@ import ShowUser from "./ShowUser/ShowUser";
 
 const Feed = (props) => {
   return (
-    <>
+    <div className='feed_wrapper'>
       <Switch>
         <Route exact path="/" render={() => <HomeContainer mobile={props.mobile} />}/>
         <Route path="/profile" render={() => <ProfileContainer mobile={props.mobile} />} />
@@ -37,7 +37,7 @@ const Feed = (props) => {
           )}
         />
       </Switch>
-    </>
+    </div>
   );
 };
 

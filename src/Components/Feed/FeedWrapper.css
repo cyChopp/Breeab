@@ -1,6 +1,5 @@
 .feed{
-    flex: 1;
-    width: 100%; 
+    flex: 6;
     overflow-y: scroll;
     -ms-overflow-style:none;
     scrollbar-width:none ;

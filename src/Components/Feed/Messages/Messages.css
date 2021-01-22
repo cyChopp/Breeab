@@ -55,3 +55,12 @@
 .messages__button {
   flex: 0.2;
 }
+
+@media (max-height:900px){
+  .messages__formMobile{
+    flex:2
+  }
+  .messages__chatMobile{
+    flex: 10;
+  }
+}

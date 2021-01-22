@@ -1,5 +1,10 @@
+.webSidebar__logoWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .webSidebar {
-  flex: 0.2;
+  flex: 1.5;
   min-width: 50px;
   padding-top: 10px;
   height: 100vh;

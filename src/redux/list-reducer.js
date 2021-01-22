@@ -31,7 +31,7 @@ export const setPostsListThunk = () => {
     await db
       .firestore()
       .collection("postsList")
-      .orderBy("time", "desc")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         dispatch(
           setList(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))

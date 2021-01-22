@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ShowUser = (props) => {
   const classes = useStyles();
-
+console.log(props)
   const theme = createMuiTheme({
     palette: {
       type: "dark",

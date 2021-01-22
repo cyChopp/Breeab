@@ -1,4 +1,5 @@
 import db from "../firebase";
+import firebase from 'firebase';
 
 //-------------- AUTHENTICATION API --------------
 export const authAPI = {
@@ -17,7 +18,7 @@ export const authAPI = {
         }
       })
       .catch((error) => {
-        alert(error, "failed to sign up");
+       return alert(error, "failed to sign up");
       });
   },
 
@@ -84,6 +85,7 @@ export const postsAPI = {
         fullname: fullname,
         username: username,
         time: time,
+        timestamp:firebase.firestore.FieldValue.serverTimestamp(),
         text: postMessage,
         image: postImage,
         status: status,
@@ -119,6 +121,7 @@ export const listAPI = {
       fullname: fullname,
       username: username,
       time: time,
+      timestamp:firebase.firestore.FieldValue.serverTimestamp(),
       text: postMessage,
       image: postImage,
       profile: profile,

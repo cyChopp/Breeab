@@ -28,11 +28,8 @@ export const setPostText = (text) => ({
 
 export const setPostThunk = (fullname,username, time, postMessage, postImage,profile,status, uid) => {
   return async (dispatch) => {
-
-    
     await postsAPI.addPost(fullname,username ,time,postMessage,postImage,profile,status, uid);
    
-
   };
 };
 

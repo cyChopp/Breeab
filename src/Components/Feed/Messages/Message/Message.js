@@ -22,9 +22,6 @@ const Message = (props) => {
 
   const styles = useClasses();
 
-  useEffect(()=>{
-console.log(props.message.name," :::: ", props.fullname )
-  },[])
 
   return (
     <>

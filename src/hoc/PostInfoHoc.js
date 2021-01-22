@@ -22,7 +22,6 @@ const PostInfoHoc = (Component) => {
         return (
             <>
             <Component {...props}/>
-            
             </>
         )
         

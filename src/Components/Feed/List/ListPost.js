@@ -24,26 +24,28 @@ const useStyles = makeStyles((theme) => ({
 
 const ListPost = (props) => {
   const history = useHistory();
+  const classes = useStyles();
+
 
   const seeProfile = () => {
+    console.log(props.post,'post::')
     props.setShowUserInfo(props.post);
     history.push(`user/${props.post.username}`);
   };
 
-  const classes = useStyles();
+  
   return (
     <div className="listPost__feed">
       <div className={classes.root}>
         <div className="ListPost__avatar" onClick={seeProfile}>
           <Avatar src={props.post.profile} className={classes.large} />
-        </div>  
+        </div>
       </div>
       <div className="listPost__body">
         <div className="listPost__header">
           <div className="listPost__textHeader">
             <h3 className="user__Infowrapper">
               <span className="listPost__userName">{props.post.fullname} </span>
-
               <span className="listPost__verified">
                 {"  "}
                 <VerifiedUserRoundedIcon className="listPost__budge" />
@@ -63,9 +65,9 @@ const ListPost = (props) => {
             <p>{props.post.text}</p>
           </div>
         </div>
-
+        <div className='listPost__imageWrapper'>
         <img src={props.post.image} />
-
+        </div>
         <div className="listPost__footer">
           <FavoriteIcon fontSize="small" />
           <TextsmsRoundedIcon />

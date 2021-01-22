@@ -17,7 +17,7 @@ const HomeContainer = (props) => {
       .collection("posts")
       .doc(props.currentUserId)
       .collection("userPosts")
-      .orderBy("time", "desc")
+      .orderBy("timestamp", "desc")
       .onSnapshot((snapshot) => {
         setPosts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
       });

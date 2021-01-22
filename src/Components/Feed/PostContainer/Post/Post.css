@@ -33,9 +33,19 @@
   width: inherit;
   width: 7%;
 }
+.post__imageWrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+
+}
+.post__imageWrapper > img{
+  border-radius: 20px;
+
+}
 
 .post--body > img {
-  border-radius: 10px;
   max-width: 90% !important;
   margin-right: auto !important;
   margin-left: auto !important;
@@ -80,9 +90,7 @@
   justify-content: space-around;
   padding-top: 15px;
 }
-#likeButton {
-  margin-left: -80px;
-}
+
 .user__Infowrapper {
   flex: 1;
   display: flex;

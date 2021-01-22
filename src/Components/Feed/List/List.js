@@ -12,6 +12,7 @@ const List = (props) => {
   const [postsList, setPostsList] = useState(props.postsList);
 
   useEffect(() => {
+
     setPostsList(props.postsList);
   }, [props.postsList]);
 

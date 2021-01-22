@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import SidebarOption from "../SidebarOption/SidebarOption";
@@ -12,16 +12,27 @@ import { Avatar, Button, Typography } from "@material-ui/core";
 import "./WebSidebar.css";
 
 const WebSidebar = (props) => {
+  const [userName  , setUserName] = useState(props.username.length > 7 ? props.username.substring(0, 7) + '...' : props.username)
+  useEffect(()=>{
+    if(props.username.length > 7){
+      setUserName(props.username.substring(0, 7) + '...')
+
+    }else{
+      setUserName(props.username)
+    }
+  },[props.username])
   return (
     <div className="webSidebar">
+      <div className='webSidebar__logoWrapper'>
       <Typography component="h1" className="webSidebar__logo">
         Breeab
       </Typography>
+      </div>
       {props.isAuth && (
         <NavLink to="/profile">
           <div className="webSidebar__profile">
             <Avatar src={props.image} className="webSidebar__profileImage" />
-            <div>{props.username}</div>
+            <div>{userName}</div>
           </div>
         </NavLink>
       )}

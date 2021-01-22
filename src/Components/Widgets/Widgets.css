@@ -1,5 +1,5 @@
 .widgets{
-    flex: 0.1;
+    flex: 4;
     background-color: rgb(34, 34, 34);
 }
 .widgets--input{
@@ -14,7 +14,7 @@
 }
 
 .widgets--input > input{
-    max-width: 150px;
+    max-width: 100px;
 
     height: 20px;
     border: none;
